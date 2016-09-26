@@ -14,8 +14,9 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({width: 800, height: 600});
-console.log(`file://${index}`)
+
   mainWindow.loadURL(`file://${index}`);
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });

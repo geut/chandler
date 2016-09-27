@@ -4,10 +4,13 @@ import React, { Component } from 'react';
 import Header from './header';
 
 export default class Main extends Component {
+
   render() {
+    const { project } = this.props;
+
     return (
       <section>
-        <Header project="test"/>
+        <Header project={project}/>
         <form>
           <select value="added">
             <option value="added" >added</option>

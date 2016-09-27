@@ -9,10 +9,10 @@ export default class Header extends Component {
     const { lighter } = styles;
   
     return (
-        <header>
-          <h1>Chandler <span className={css(lighter)}> {project.name}</span></h1>
-        </header>
-    )
+      <header>
+        <h1>Chandler <span className={css(lighter)}> {project.name}</span></h1>
+      </header>
+    );
   }
 };
 

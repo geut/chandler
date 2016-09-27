@@ -1,10 +1,12 @@
 
-const project = (state = { name: 'test', enabled: false }, action) => {
+import * as types from '../constants/actions';
+
+const project = (state = { }, action) => {
+  
   switch (action.type) {
-    case 'ENABLE':
+    case types.LOAD_PROJECT:
       return {
-        ...state,
-        enabled: true
+        ...action.project
       }
     default:
       return state

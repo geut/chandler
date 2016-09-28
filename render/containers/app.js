@@ -1,24 +1,36 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ipcRenderer } from 'electron';
+
 
 import { loadProject } from '../actions';
 import Main from '../components/main';
 
-// const App = ({ path, loadProject }) => (<Main path={path} />);
-
-const loadData = ({loadProject}) => {
-    loadProject();
-}
-
 class App extends Component {
+
   componentWillMount() {
-    loadData(this.props);
+    const { loadProject, current } = this.props;
+    if (current) {
+      loadProject(current);
+    }
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
   }
 
   render() {
-    const {project} = this.props;
-    return <Main project={project} />;
+    const { project } = this.props;
+    let component;
+
+    if (Object.keys(project).length) { // #asquito
+      component = <Main project={project} />;
+    } else {
+      component = <h1>Open a Project!</h1>
+    }
+
+    return component;
   }
 }
 

@@ -9,10 +9,13 @@ const template = [
         label: 'Open',
         accelerator: 'CmdOrCtrl+O',
         click (item, focusedWindow) {
-          dialog.showOpenDialog(
-            { properties: ['openDirectory'] },
-            dir => console.log(dir)
+
+          dialog.showOpenDialog({ properties: ['openDirectory'] },
+            (dir) => {
+              focusedWindow.webContents.send('project:open', dir);
+            }
           );
+
         }
       }
     ]

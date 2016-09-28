@@ -12,7 +12,10 @@ const template = [
 
           dialog.showOpenDialog({ properties: ['openDirectory'] },
             (dir) => {
-              focusedWindow.webContents.send('project:open', dir);
+              if (dir && dir.length) {
+                focusedWindow.webContents.send('project:open', dir[0]);
+              }
+ 
             }
           );
 

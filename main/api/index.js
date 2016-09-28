@@ -1,8 +1,10 @@
 
 import { ipcMain } from  'electron';
 
+import  { loadProject } from './project'; 
+
 const listeners = {
-  'project:load': (event, path) =>  event.sender.send('project:loaded', {name: path || 'default'})
+  'project:load': loadProject
 }
 
 const all = Object.keys(listeners);

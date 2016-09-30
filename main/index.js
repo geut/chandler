@@ -1,12 +1,12 @@
 
-import path from 'path';
+import { resolve } from 'path';
 
 import { app, BrowserWindow, Menu } from 'electron';
 
 import api from './api';
 import menu from './menu';
 
-const index = path.resolve(__dirname, '..', 'index.html');
+const index = resolve(__dirname, '..', 'index.html');
 let mainWindow = null;
 
 app.on('window-all-closed', () => {

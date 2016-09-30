@@ -1,16 +1,24 @@
 
-import path from 'path';
-import fs from 'fs';
+import { resolve } from 'path';
+import { readFile, stat } from 'fs';
 
 
 export const loadProject = (event, dirname) => {
 
-  fs.readFile(path.resolve(dirname, 'package.json'), 'utf8', (err, data) => {
+  readFile(resolve(dirname, 'package.json'), 'utf8', (err, data) => {
     if (err) return; // #todo
 
     const pkg = JSON.parse(data);
-    // event.sender.send('project:loaded', pkg)
-    event.returnValue = pkg;
+    
+    stat(resolve(dirname, 'changelog.md'), (err, stats) => {
+
+      pkg.hasChangelog = !err;
+
+      event.sender.send('project:loaded', pkg);
+
+    });
+    
+    
   });
 
-}; 
+};

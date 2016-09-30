@@ -15,10 +15,8 @@ const template = [
               if (dir && dir.length) {
                 focusedWindow.webContents.send('project:open', dir[0]);
               }
- 
             }
           );
-
         }
       }
     ]

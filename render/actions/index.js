@@ -6,11 +6,11 @@ const create = (type, state) => ({
   type, ...state
 });
 
-export const loadProject = (path) => dispatch => {
+export const loadProject = (event, project) => dispatch => {
   const { LOAD_PROJECT } = types;
   
-  dispatch( create(LOAD_PROJECT, {project: getProject(path)}) );
+  dispatch( create(LOAD_PROJECT, { project }) );
 };
 
-export const openPath = (event, path) => loadProject(path);
+export const openPath = (event, path) => getProject(path);
 

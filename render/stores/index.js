@@ -4,11 +4,12 @@ import thunk from 'redux-thunk';
 import createIpc from 'redux-electron-ipc';
 
 import reducer from '../reducers';
-import { openPath, loadProject } from '../actions'
+import { openPath, loadProject, loadChangelog } from '../actions'
 
 const ipc = createIpc({
   'project:open': openPath,
-  'project:loaded': loadProject
+  'project:loaded': loadProject,
+  'changelog:loaded': loadChangelog
 });
 
 const store = createStore(

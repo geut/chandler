@@ -6,6 +6,7 @@ const project = (state = {}, action) => {
   switch (action.type) {
     case types.LOAD_PROJECT:
       return {
+        // ...state,
         ...action.project
       }
     default:

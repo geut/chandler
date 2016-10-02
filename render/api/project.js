@@ -1,7 +1,4 @@
 
-import { ipcRenderer } from 'electron';
+import { send } from 'redux-electron-ipc';
 
-
-export const getProject = (path) => {
-  ipcRenderer.send('project:load', path);
-}
+export const getProject = (path) => send('project:load', path);

@@ -2,24 +2,18 @@
 import React, { Component } from 'react';
 
 import Header from './header';
+import Changelog from './changelog';
 
 export default class Main extends Component {
 
   render() {
-    const { project } = this.props;
+    const { project, changelog } = this.props;
 
     return (
-      <section>
+      <div>
         <Header project={project}/>
-        <form>
-          <select value="added">
-            <option value="added" >added</option>
-            <option value="fixed">fixed</option>
-            <option value="removed">removed</option>
-          </select>
-          <input type="text"></input>
-        </form>
-      </section>
+        <Changelog changelog={changelog}/>
+      </div>
     );
   }
 }

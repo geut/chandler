@@ -2,9 +2,11 @@
 import { ipcMain } from  'electron';
 
 import  { loadProject } from './project'; 
+import  { loadChangelog } from './changelog'; 
 
 const listeners = {
-  'project:load': loadProject
+  'project:load': loadProject,
+  'changelog:load': loadChangelog
 }
 
 const all = Object.keys(listeners);

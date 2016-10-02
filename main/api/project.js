@@ -10,6 +10,8 @@ export const loadProject = (event, dirname) => {
 
     const pkg = JSON.parse(data);
     
+    pkg.path = dirname;
+    
     stat(resolve(dirname, 'changelog.md'), (err, stats) => {
 
       pkg.hasChangelog = !err;

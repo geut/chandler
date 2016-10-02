@@ -6,13 +6,17 @@ export default class Header extends Component {
   
   render() {
     const { project } = this.props;
-    const { lighter } = styles;
-    
-    const { name, hasChagelog } = project;
+    const { lighter } = styles;    
+    const { name } = project;
   
+    const title = ( name ? 
+      <span className={css(lighter)}> {name}</span> : <em>No Project</em>
+    ) 
+
     return (
       <header>
-        <h1>Chandler <span className={css(lighter)}> {name}</span></h1>
+        <h1>Chandler {title}            
+        </h1>
       </header>
     );
   }

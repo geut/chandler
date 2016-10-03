@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Main from '../components/main';
+import Welcome from '../components/welcome';
 import { getChangelog } from '../api/changelog'
 
 class Project extends Component {
@@ -18,10 +19,11 @@ class Project extends Component {
 
   render() {
     const { project, changelog } = this.props;
+    const hasProject = !!Object.keys(project).length;
     
-    return ( project ? 
+    return ( hasProject ? 
       <Main project={project} changelog={changelog}/> :
-      <em>Open Project</em>
+      <Welcome/>
     );
   }
 }

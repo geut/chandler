@@ -20,7 +20,7 @@ export default Changelog;
 
 const styles = StyleSheet.create({
   container: {
-    margin: '0 100px'
+    padding: '0 100px'
   }
 });
  

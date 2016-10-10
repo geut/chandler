@@ -6,29 +6,16 @@ export default class Header extends Component {
   
   render() {
     const { project } = this.props;
-    const { toolbar, lighter, folder } = styles;
+    const { toolbar, lighter, title } = styles;
 
     const { name, path, version } = project;
   
     return (
-      <header className={css(toolbar)}>
-      { 
-        name ?
-        <h1>
-          {name} <span className={css(lighter)}> v{version}</span>            
-        </h1>
-        :
-        <em>No Project Selected</em> 
-      }
-      { 
-        path ?
-        <p className={css(folder)}>
-          <i className="fa fa-folder-open-o"/>{path}
-        </p> 
-        : 
-        <span /> 
-      }
-      </header>
+      <div className={css(toolbar)}>
+        <div className={css(title)}>
+          <i className="fa fa-folder-open-o"/> {name} <span className={css(lighter)}> v{version}</span>            
+        </div>
+      </div>
     );
   }
 };
@@ -40,15 +27,14 @@ const styles = StyleSheet.create({
   toolbar: {
     borderBottom: '1px solid #ccc',
     minHeight: 60,
-    position: 'relative'
+    position: 'relative',
+    background: '#f0f0f0'
   },
-  folder: {
-    fontSize: 12,
-    position: 'absolute',
-    top: -25,
-    left: 5,
+  title: {
+    fontSize: 22,
     color: '#333',
-    fontWeight: 200    
+    fontWeight: 600,
+    padding: 15
   }
   
 });

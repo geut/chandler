@@ -1,12 +1,13 @@
 
 import * as types from '../constants/actions';
 
-const project = (state = {}, action) => {
+const project = (state = {loaded: false}, action) => {
   
   switch (action.type) {
     case types.LOAD_PROJECT:
       return {
-        // ...state,
+        ...state,
+        loaded: true,
         ...action.project
       }
     default:

@@ -19,9 +19,10 @@ class Project extends Component {
 
   render() {
     const { project, changelog } = this.props;
-    const hasProject = !!Object.keys(project).length;
+    const { loaded } = project;
     
-    return ( hasProject ? 
+    return ( 
+      loaded ? 
       <Main project={project} changelog={changelog}/> :
       <Welcome/>
     );

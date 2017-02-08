@@ -8,13 +8,21 @@ const create = (type, state) => ({
 });
 
 export const loadProject = (event, project) => (dispatch, getState) => {
-  const { LOAD_PROJECT } = types;  
-  return dispatch( create(LOAD_PROJECT, { project }) );    
+  const { PROJECT_LOAD } = types;
+  return dispatch( create(PROJECT_LOAD, { project }) );
 };
 
-export const openPath = (event, path) => getProject(path);
+//hmmm... from header close onClick
+export const closeProject = (event) => (dispatch) => {
+  const { PROJECT_CLOSE } = types;
+  return dispatch( create(PROJECT_CLOSE) );
+  
+}
 
+// IPC
+export const openPath = (event, path) => getProject(path); 
+// IPC
 export const loadChangelog = (event, changelog) => dispatch => {
-  const { LOAD_CHANGELOG } = types;
-  return dispatch( create(LOAD_CHANGELOG, { changelog }) );
+  const { CHANGELOG_LOAD } = types;
+  return dispatch( create(CHANGELOG_LOAD, { changelog }) );
 }

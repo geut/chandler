@@ -1,4 +1,5 @@
 
-export const LOAD_PROJECT = 'LOAD_PROJECT';
+export const PROJECT_LOAD = 'PROJECT_LOAD';
+export const PROJECT_CLOSE = 'PROJECT_CLOSE';
 
-export const LOAD_CHANGELOG = 'LOAD_CHANGELOG';
+export const CHANGELOG_LOAD = 'CHANGELOG_LOAD';

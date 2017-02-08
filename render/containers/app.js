@@ -1,12 +1,14 @@
 
 import React from 'react';
+import { connect } from 'react-redux';
 
-import Project from './project';
- 
-const App = () => (
-  <div>
-    <Project />
-  </div>
+import Main from './main';
+import Dashboard from '../components/dashboard'; 
+
+const App = ({ loaded }) => (
+  loaded ? <Main />  : <Dashboard />
 );
 
-export default App;
+const mapStateToProps = ({ project }) => ({ loaded: project.loaded });
+
+export default connect(mapStateToProps)(App);

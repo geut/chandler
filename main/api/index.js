@@ -1,10 +1,11 @@
 
 import { ipcMain } from  'electron';
 
-import  { loadProject } from './project'; 
+import  { loadProject, openProject } from './project'; 
 import  { loadChangelog } from './changelog'; 
 
 const listeners = {
+  'project:open': openProject,
   'project:load': loadProject,
   'changelog:load': loadChangelog
 }

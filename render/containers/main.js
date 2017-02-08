@@ -9,7 +9,7 @@ import { closeProject } from '../actions';
 
 const Main = ({ project, changelog, closeProject }) => (
   <div>
-    <Header project={project} onProjectClose={closeProject} />
+    <Header project={project} onCloseProject={closeProject} />
     { changelog && 
     <Changelog changelog={changelog} />
     }

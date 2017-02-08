@@ -1,7 +1,18 @@
 
 import { resolve } from 'path';
 import { readFile, stat } from 'fs';
+import { dialog } from 'electron';
 
+export const openProject = (event) => {
+  dialog.showOpenDialog(
+    { properties: ['openDirectory'] },
+    (dir) => {  
+      if (dir && dir.length) {
+        loadProject(event, dir[0]);  
+      }
+    }
+  );
+}
 
 export const loadProject = (event, dirname) => {
 

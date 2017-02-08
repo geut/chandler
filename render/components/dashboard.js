@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite'; 
 
 
-const Dashboard = () => {
+const Dashboard = ({onOpenProject}) => {
   const {container, header, title, headline, actions} = styles;
   return (
     <div className={css(container)}>
@@ -12,7 +12,7 @@ const Dashboard = () => {
         <div className={css(headline)}>Changelog Handler &amp; Helper</div>
       </div>
       <div className={css(actions)}>
-        <button type="button">Open</button>
+        <button type="button" onClick={onOpenProject}>Open</button>
       </div>
     </div>
   );

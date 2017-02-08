@@ -3,10 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Main from './main';
-import Dashboard from '../components/dashboard'; 
+import Welcome from './welcome'; 
 
 const App = ({ loaded }) => (
-  loaded ? <Main />  : <Dashboard />
+  loaded ? <Main />  : <Welcome />
 );
 
 const mapStateToProps = ({ project }) => ({ loaded: project.loaded });

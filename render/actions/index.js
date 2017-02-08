@@ -1,5 +1,5 @@
 
-import { getProject } from '../api/project';
+import { getProject, selectProject } from '../api/project';
 import { getChangelog } from '../api/changelog';
 import * as types from '../constants/actions';
 
@@ -12,12 +12,12 @@ export const loadProject = (event, project) => (dispatch, getState) => {
   return dispatch( create(PROJECT_LOAD, { project }) );
 };
 
-//hmmm... from header close onClick
 export const closeProject = (event) => (dispatch) => {
   const { PROJECT_CLOSE } = types;
   return dispatch( create(PROJECT_CLOSE) );
-  
 }
+
+export const openProject = (event) => (dispatch) => dispatch(selectProject());
 
 // IPC
 export const openPath = (event, path) => getProject(path); 

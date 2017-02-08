@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite'; 
 
 const Header = (props) => {
-  const { project, onProjectClose } = props;
+  const { project, onCloseProject } = props;
   const { toolbar, lighter, title, actions } = styles;
 
   const { name, path, version } = project;
@@ -14,7 +14,7 @@ const Header = (props) => {
         <i className="fa fa-folder-open-o"/> {name} <span className={css(lighter)}> v{version}</span>            
       </div>
       <div className={css(actions)}>
-        <button type="button" onClick={onProjectClose}>Close</button>
+        <button type="button" onClick={onCloseProject}>Close</button>
       </div>
     </div>
   );

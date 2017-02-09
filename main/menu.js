@@ -1,7 +1,7 @@
 
-const { Menu, app, dialog } = require('electron');
+import { Menu, app, dialog } from 'electron';
 
-const { openProject } = require('./api/project');
+import { openProject } from './api/project';
 
 const template = [ 
   {
@@ -12,13 +12,6 @@ const template = [
         accelerator: 'CmdOrCtrl+O',
         click (item, focusedWindow) {
           openProject(focusedWindow);
-          // dialog.showOpenDialog({ properties: ['openDirectory'] },
-          //   (dir) => {
-          //     if (dir && dir.length) {
-          //       focusedWindow.webContents.send('project:open', dir[0]);
-          //     }
-          //   }
-          // );
         }
       }
     ]

@@ -3,16 +3,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../components/header';
-import Changelog from '../components/changelog';
+import Changelog from './changelog';
 import { closeProject } from '../actions';
 
 
-const Main = ({ project, changelog, closeProject }) => (
+const Main = ({ project, closeProject }) => (
   <div>
     <Header project={project} onCloseProject={closeProject} />
-    { changelog && 
-    <Changelog changelog={changelog} />
-    }
+    <Changelog />
   </div>
 );
 

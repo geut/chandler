@@ -1,11 +1,14 @@
 
 import { CHANGELOG_LOAD } from '../constants/actions';
 
-const changelog = (state = '', action) => {
+const changelog = (state = {}, action) => {
   switch (action.type) {
     case CHANGELOG_LOAD:
-      const { changelog } = action; 
-      return changelog;
+console.log(action)    
+      const { changelog:source } = action; 
+      return {
+        source
+      };
     default:
       return state
   }

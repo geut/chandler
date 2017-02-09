@@ -3,6 +3,8 @@ import { resolve } from 'path';
 import { readFile, stat } from 'fs';
 import { dialog } from 'electron';
 
+import { resolveChangelog } from './changelog';
+
 const showOpenDialog =  (cb) => {
     dialog.showOpenDialog(
     { properties: ['openDirectory'] },
@@ -23,13 +25,10 @@ const readPackageJson = (sender, dirname) => {
     
     pkg.path = dirname;
     
-    stat(resolve(dirname, 'changelog.md'), (err, stats) => {
+    pkg.hasChangelog = !!resolveChangelog(dirname);
 
-      pkg.hasChangelog = !err;
+    sender.send('project:loaded', pkg);
 
-      sender.send('project:loaded', pkg);
-
-    });
   });
 };
 

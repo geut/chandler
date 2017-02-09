@@ -7,7 +7,6 @@ import reducer from '../reducers';
 import { loadProject, loadChangelog } from '../actions'
 
 const ipc = createIpc({
-  // 'project:open': openPath,
   'project:loaded': loadProject,
   'changelog:loaded': loadChangelog
 });

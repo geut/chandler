@@ -11,9 +11,9 @@ export const closeProject = (event) => (dispatch) => {
 
 export const openProject = (event) => (dispatch) => dispatch(send('project:open'));
 
+export const getChangelog = (path) => (dispatch) => dispatch(send('changelog:load', path));
 
 // IPC ----
-// export const openPath = (event, path) => send('project:load', path);
 
 export const loadProject = (event, project) => (dispatch) => {
   return dispatch({
@@ -25,6 +25,6 @@ export const loadProject = (event, project) => (dispatch) => {
 export const loadChangelog = (event, changelog) => dispatch => {
   return dispatch({
     type: CHANGELOG_LOAD, 
-    changelog 
+    changelog
   });
 };

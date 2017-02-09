@@ -3,18 +3,18 @@ import { resolve } from 'path';
 import { readFile, stat } from 'fs';
 import { dialog } from 'electron';
 
-export const openProject = (event) => {
-  dialog.showOpenDialog(
+const showOpenDialog =  (cb) => {
+    dialog.showOpenDialog(
     { properties: ['openDirectory'] },
     (dir) => {  
       if (dir && dir.length) {
-        loadProject(event, dir[0]);  
+       cb(dir[0]);
       }
     }
   );
 }
 
-export const loadProject = (event, dirname) => {
+const readPackageJson = (sender, dirname) => {
 
   readFile(resolve(dirname, 'package.json'), 'utf8', (err, data) => {
     if (err) return; // #todo
@@ -27,11 +27,14 @@ export const loadProject = (event, dirname) => {
 
       pkg.hasChangelog = !err;
 
-      event.sender.send('project:loaded', pkg);
+      sender.send('project:loaded', pkg);
 
     });
-    
-    
   });
-
 };
+
+export const openProject = (eventOrFocusedWindow) => {
+  const { sender, webContents } = eventOrFocusedWindow;
+  showOpenDialog((path) => readPackageJson(sender || webContents, path));
+}
+

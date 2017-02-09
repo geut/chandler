@@ -1,28 +1,30 @@
 
-import { getProject, selectProject } from '../api/project';
-import { getChangelog } from '../api/changelog';
-import * as types from '../constants/actions';
+import { send } from 'redux-electron-ipc';
 
-const create = (type, state) => ({
-  type, ...state
-});
-
-export const loadProject = (event, project) => (dispatch, getState) => {
-  const { PROJECT_LOAD } = types;
-  return dispatch( create(PROJECT_LOAD, { project }) );
-};
+import { PROJECT_LOAD, PROJECT_CLOSE, CHANGELOG_LOAD } from '../constants/actions';
 
 export const closeProject = (event) => (dispatch) => {
-  const { PROJECT_CLOSE } = types;
-  return dispatch( create(PROJECT_CLOSE) );
-}
+  return dispatch({
+    type: PROJECT_CLOSE
+  });
+};
 
-export const openProject = (event) => (dispatch) => dispatch(selectProject());
+export const openProject = (event) => (dispatch) => dispatch(send('project:open'));
 
-// IPC
-export const openPath = (event, path) => getProject(path); 
-// IPC
+
+// IPC ----
+// export const openPath = (event, path) => send('project:load', path);
+
+export const loadProject = (event, project) => (dispatch) => {
+  return dispatch({
+    type: PROJECT_LOAD,
+    project
+  });
+};
+
 export const loadChangelog = (event, changelog) => dispatch => {
-  const { CHANGELOG_LOAD } = types;
-  return dispatch( create(CHANGELOG_LOAD, { changelog }) );
-}
+  return dispatch({
+    type: CHANGELOG_LOAD, 
+    changelog 
+  });
+};

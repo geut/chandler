@@ -1,6 +1,8 @@
 
 const { Menu, app, dialog } = require('electron');
 
+const { openProject } = require('./api/project');
+
 const template = [ 
   {
     label: 'Project',
@@ -9,14 +11,14 @@ const template = [
         label: 'Open',
         accelerator: 'CmdOrCtrl+O',
         click (item, focusedWindow) {
-
-          dialog.showOpenDialog({ properties: ['openDirectory'] },
-            (dir) => {
-              if (dir && dir.length) {
-                focusedWindow.webContents.send('project:open', dir[0]);
-              }
-            }
-          );
+          openProject(focusedWindow);
+          // dialog.showOpenDialog({ properties: ['openDirectory'] },
+          //   (dir) => {
+          //     if (dir && dir.length) {
+          //       focusedWindow.webContents.send('project:open', dir[0]);
+          //     }
+          //   }
+          // );
         }
       }
     ]

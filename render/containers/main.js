@@ -14,8 +14,8 @@ const Main = ({ project, changelog, closeProject }) => (
     <Changelog changelog={changelog} />
     }
   </div>
-)
+);
 
-const mapStateToProps = ({ project }) => ({ project })
+const mapStateToProps = ({ project }) => ({ project });
 
 export default connect(mapStateToProps, { closeProject })(Main);

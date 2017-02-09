@@ -3,7 +3,7 @@ import { resolve } from 'path';
 
 import { app, BrowserWindow, Menu } from 'electron';
 
-import api from './api';
+import ipc from './ipc';
 import menu from './menu';
 
 const index = resolve(__dirname, '..', 'index.html');
@@ -13,13 +13,13 @@ app.on('window-all-closed', () => {
   // if (process.platform != 'darwin') {
     app.quit();
   // }
-  api.shutdown();
+  ipc.shutdown();
 });
 
 app.on('ready', () => {
-  api.listen();
+  ipc.listen();
 
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 800, height: 600}); //titleBarStyle: 'hidden-inset'
 
   mainWindow.loadURL(`file://${index}`);
 

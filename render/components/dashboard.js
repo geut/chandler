@@ -16,7 +16,7 @@ const Dashboard = ({onOpenProject}) => {
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;
 

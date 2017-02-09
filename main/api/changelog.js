@@ -10,7 +10,7 @@ export const resolveChangelog = (dirname) => {
   if (!res.length) {
     return false;
   }
-  
+
   return resolve(dirname, res[0]);
 }
 

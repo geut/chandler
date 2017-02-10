@@ -3,14 +3,13 @@ import React from 'react';
 import Markdown from 'react-remarkable';
 import { StyleSheet, css } from 'aphrodite';
 
-const InitChangelog = ({  }) => {
-  const { content, title, actions } = styles;
-
+const InitChangelog = ({ onInitChangelog, path }) => {
+  const { content, title, actions } = styles;;
   return ( 
       <div className={css(content)}>
         <div className={css(title)}>No Changelog found for this project</div>
         <div className={css(actions)}>
-          <button type="button">Initialize</button> 
+          <button type="button" onClick={(e) => onInitChangelog(path) }>Initialize</button> 
         </div>
       </div>
     );

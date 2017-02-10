@@ -1,16 +1,16 @@
 
-import * as types from '../constants/actions';
+import { PROJECT_LOAD, PROJECT_CLOSE } from '../constants/actions';
 
-const project = (state = {loaded: false}, {type, project}) => {
+const project = (state = { loaded: false }, { type, project }) => {
 
   switch (type) {
-    case types.PROJECT_LOAD:
+    case PROJECT_LOAD:
       return {
         ...state,
         ...project,
         loaded: true        
       }
-    case types.PROJECT_CLOSE: 
+    case PROJECT_CLOSE: 
       return {
         loaded: false
       }

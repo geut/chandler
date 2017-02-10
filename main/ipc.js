@@ -2,12 +2,13 @@
 import { ipcMain } from  'electron';
 
 import  { loadProject, openProject } from './api/project'; 
-import  { loadChangelog } from './api/changelog'; 
+import  { loadChangelog, initChangelog } from './api/changelog'; 
 
 const listeners = {
   'project:open': openProject,
   // 'project:load': loadProject,
-  'changelog:load': loadChangelog
+  'changelog:load': loadChangelog,
+  'changelog:init': initChangelog
 }
 
 const all = Object.keys(listeners);

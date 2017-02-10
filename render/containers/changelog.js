@@ -2,35 +2,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getChangelog } from '../actions'
+import { getChangelog, initChangelog } from '../actions'
 import InitChangelog from '../components/init-changelog';
 
 class Changelog extends Component {
 
-    componentWillMount() {
-      const { path, hasChangelog, getChangelog } = this.props;
-      if (hasChangelog) {
-        getChangelog(path);
-      }
-      
+    componentDidMount() {
+      const { path, getChangelog } = this.props;
+
+      getChangelog(path);
     }
 
     render() {
-      const { source, hasChangelog } = this.props;
+      const { source, loaded, initChangelog, path } = this.props;
       return (
-        hasChangelog ?
+        loaded ?
           <div>{source}</div>
         :
-          <InitChangelog />
+          <InitChangelog onInitChangelog={initChangelog} path={path}/>
       );
     }
 };
 
 
 const mapStateToProps = ({ project, changelog }) => ({ 
-  hasChangelog: project.hasChangelog,
+  loaded: changelog.loaded,
   path: project.path,
   source: changelog.source
 });
 
-export default connect(mapStateToProps, { getChangelog })(Changelog);
+export default connect(mapStateToProps, { getChangelog, initChangelog })(Changelog);

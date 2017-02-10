@@ -25,8 +25,6 @@ const readPackageJson = (sender, dirname) => {
     
     pkg.path = dirname;
     
-    pkg.hasChangelog = !!resolveChangelog(dirname);
-
     sender.send('project:loaded', pkg);
 
   });

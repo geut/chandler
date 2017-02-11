@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getChangelog, initChangelog } from '../actions'
-import InitChangelog from '../components/init-changelog';
+import Editor from '../components/editor';
+import ChangelogNotFound from '../components/changelog-not-found';
 
 class Changelog extends Component {
 
@@ -17,9 +18,9 @@ class Changelog extends Component {
       const { source, loaded, initChangelog, path } = this.props;
       return (
         loaded ?
-          <div>{source}</div>
+          <Editor source={source} />
         :
-          <InitChangelog onInitChangelog={initChangelog} path={path}/>
+          <ChangelogNotFound onInitChangelog={initChangelog} path={path}/>
       );
     }
 };

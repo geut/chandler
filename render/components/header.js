@@ -27,15 +27,18 @@ const styles = StyleSheet.create({
     fontWeight: 100
   },
   toolbar: {
+    borderTop: '2px solid orange',
     borderBottom: '1px solid #ccc',
     minHeight: 60,
     position: 'relative',
-    background: '#f0f0f0',
+    background: '#f9f9f9',
 
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    
+    flex: 'none'
 
   },
   title: {

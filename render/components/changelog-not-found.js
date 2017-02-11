@@ -3,7 +3,7 @@ import React from 'react';
 import Markdown from 'react-remarkable';
 import { StyleSheet, css } from 'aphrodite';
 
-const InitChangelog = ({ onInitChangelog, path }) => {
+const ChangelogNotFound = ({ onInitChangelog, path }) => {
   const { content, title, actions } = styles;;
   return ( 
       <div className={css(content)}>
@@ -15,7 +15,7 @@ const InitChangelog = ({ onInitChangelog, path }) => {
     );
 };
 
-export default InitChangelog;
+export default ChangelogNotFound;
 
 const styles = StyleSheet.create({
   content: {

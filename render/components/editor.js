@@ -25,25 +25,28 @@ export default Editor;
 const styles = StyleSheet.create({
     container: {
       display: 'flex',
-      alignItems: 'flex-start',
+      alignItems: 'stretch',
       flexDirection: 'row',
       justifyContent: 'center',
-      flex: '1'
+      flex: '1',
+
+      background: '#f0f0f0'
     },
     content: {      
       flex: '1 0 0',
-      alignSelf: 'stretch',
 
+      background: '#fefefe',
       overflowY: 'scroll',
-
-      padding: 10
+      marginLeft: '20px',
+      padding: '20px'
     },
     actions: {
       display: 'flex',
       alignItems: 'stretch',
       flexDirection: 'column',
-      justifyContent: 'space-around',
-      flex: '0 0'     
+      justifyContent: 'flex-start',
+      flex: '0 0',
+      padding: '10px'
     },
     action: {
       margin: '2px 5px'

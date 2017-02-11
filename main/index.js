@@ -1,7 +1,7 @@
 
 import { resolve } from 'path';
 
-import { app, BrowserWindow, Menu } from 'electron';
+import { app, BrowserWindow, Menu, shell } from 'electron';
 
 import ipc from './ipc';
 import menu from './menu';
@@ -27,6 +27,13 @@ app.on('ready', () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+  });
+
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    // prevent Electron from opening another BrowserWindow
+    event.preventDefault();
+    // open the url in the default system browser
+    shell.openExternal(url);
   });
 
 });

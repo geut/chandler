@@ -3,8 +3,6 @@ import { resolve } from 'path';
 import { readFile, stat } from 'fs';
 import { dialog } from 'electron';
 
-import { resolveChangelog } from './changelog';
-
 const showOpenDialog =  (cb) => {
     dialog.showOpenDialog(
     { properties: ['openDirectory'] },

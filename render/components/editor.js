@@ -14,7 +14,7 @@ const Editor = ({ source }) => {
       </div>
       <div className={css(actions)}>
         <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Changes</button>
-        <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Release</button>        
+        <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Release</button> 
       </div>
   </div>
   );
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
       background: '#f0f0f0'
     },
-    content: {      
+    content: {
       flex: '1 0 0',
 
       background: '#fefefe',

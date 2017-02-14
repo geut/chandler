@@ -1,16 +1,16 @@
 
 import React from 'react';
-import Markdown from 'react-remarkable';
 import { StyleSheet, css } from 'aphrodite'; 
 
+import ChangelogMD from './changelog-md';
 
-const Editor = ({ source }) => {
+const Editor = ({ root }) => {
   const { container, content, actions, action } = styles;
-
+  console.log(root)
   return (
     <div className={css(container)}>
       <div className={css(content)}>
-        <Markdown source={source} />
+        <ChangelogMD root={root} />
       </div>
       <div className={css(actions)}>
         <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Changes</button>

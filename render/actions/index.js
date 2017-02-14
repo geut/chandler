@@ -29,10 +29,10 @@ export const loadProject = (event, project) => (dispatch) => {
   });
 };
 
-export const loadChangelog = (event, changelog) => dispatch => {
+export const loadChangelog = (event, mdast) => dispatch => {
   return dispatch({
     type: CHANGELOG_LOAD, 
-    changelog
+    mdast
   });
 };
 

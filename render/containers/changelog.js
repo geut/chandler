@@ -15,10 +15,10 @@ class Changelog extends Component {
     }
 
     render() {
-      const { source, loaded, initChangelog, path } = this.props;
+      const { loaded, initChangelog, path, root } = this.props;
       return (
         loaded ?
-          <Editor source={source} />
+          <Editor root={root} />
         :
           <ChangelogNotFound onInitChangelog={initChangelog} path={path}/>
       );
@@ -29,7 +29,8 @@ class Changelog extends Component {
 const mapStateToProps = ({ project, changelog }) => ({ 
   loaded: changelog.loaded,
   path: project.path,
-  source: changelog.source
+  source: changelog.source,
+  root: changelog.mdast
 });
 
 export default connect(mapStateToProps, { getChangelog, initChangelog })(Changelog);

@@ -1,13 +1,13 @@
 
 import { CHANGELOG_LOAD, CHANGELOG_NOT_FOUND } from '../constants/actions';
 
-const changelog = (state = { loaded: false}, action) => {
+const changelog = (state = { loaded: false }, action) => {
   switch (action.type) {
     case CHANGELOG_LOAD:
-      const { changelog:source } = action;
+      const { mdast } = action;
       return {
         ...state,
-        source,
+        mdast,
         loaded: true
       };
     case CHANGELOG_NOT_FOUND:

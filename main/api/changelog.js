@@ -10,15 +10,10 @@ export const loadChangelog = (event, dirname) => {
   const parser = chanParser(dirname);
 
   if (parser.exists()) {
-    event.sender.send('changelog:loaded', parser.stringify());
+    event.sender.send('changelog:loaded', parser.root);
   } else {
       event.sender.send('changelog:not_found');
   }
-}
-
-export const retrieveChangelog = (event, dirname) => {
-  const p = parser(dirname);
-
 }
 
 export const initChangelog = (event, dirname) => {

@@ -3,17 +3,9 @@ import React from 'react';
 import toHAST from 'mdast-util-to-hast';
 import wrapper from 'hast-to-hyperscript';
 
-const UnReleasedHeader = ({ value, children }) => {
-  return (<div className="UnReleasedHeader">{children}</div>);
-}
-
-const ChangeHeader = ({ value, children }) => {
-  return (<div className="ChangeHeader">{children}</div>);
-}
-
-const ChangeList = ({ value, children }) => {
-  return (<div className="ChangeList">{children}</div>);
-}
+import UnReleasedHeader from './sections/UnReleasedHeader';
+import ChangeHeader from './sections/ChangeHeader';
+import ChangeList from './sections/ChangeList';
 
 const components = {
   UnReleasedHeader,
@@ -48,7 +40,6 @@ const hastNodeChangeList = (node) => {
     tagName: 'ChangeList',
     children: [toHAST(node)]
   }
-
 }
 
 const toHastNodes = (children) => {
@@ -60,9 +51,9 @@ const toHastNodes = (children) => {
     const { type } = node;
     const { identifier } = node.children[0];
 
-    if (type === 'heading') {
+    if (type === 'heading') { // headers
 
-      if (identifier === 'unreleased') {
+      if (identifier === 'unreleased') { // if unreleased header, mark it to add subsections
         ret.push(hastNodeUnrelased(node));
 
         unrelease = true;
@@ -72,17 +63,17 @@ const toHastNodes = (children) => {
       }
 
       if (unrelease) {
-        if (depth === node.depth) {
+        if (depth === node.depth) { // if got a same level header then close unrelease section
           unrelease = false;
         } else {
-          ret.push(hastNodeChangeHeader(node));
+          ret.push(hastNodeChangeHeader(node)); //add change headers
           continue;
         }
       }
     }
 
     if (unrelease && type === 'list') {
-      ret.push(hastNodeChangeList(node));
+      ret.push(hastNodeChangeList(node)); // changes list
     } else {
       ret.push(toHAST(node));
     }

@@ -1,8 +1,13 @@
 
 import React from 'react';
 
-const ChangeList = ({ value, children }) => {
-  return (<div className="ChangeList">{children}</div>);
+const ChangeList = ({ value, isEditing, children }) => {
+  return (
+    <div className="ChangeList">
+      <input type="text" hidden={!isEditing} />
+      {children}
+    </div>
+  );
 }
 
 export default ChangeList;

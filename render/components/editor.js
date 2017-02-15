@@ -1,20 +1,20 @@
 
 import React from 'react';
-import { StyleSheet, css } from 'aphrodite'; 
+import { StyleSheet, css } from 'aphrodite';
 
 import ChangelogMD from './changelog-md';
 
-const Editor = ({ root }) => {
+const Editor = ({ mdast }) => {
   const { container, content, actions, action } = styles;
-  console.log(root)
+
   return (
     <div className={css(container)}>
       <div className={css(content)}>
-        <ChangelogMD root={root} />
+        <ChangelogMD mdast={mdast} />
       </div>
       <div className={css(actions)}>
         <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Changes</button>
-        <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Release</button> 
+        <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Release</button>
       </div>
   </div>
   );

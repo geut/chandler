@@ -1,8 +1,9 @@
 
 import React from 'react';
 import toHAST from 'mdast-util-to-hast';
-import wrapper from 'hast-to-hyperscript';
+// import wrapper from 'hast-to-hyperscript';
 
+import hastToReact from '../utils/hast-to-react';
 import UnReleasedHeader from './sections/UnReleasedHeader';
 import ChangeHeader from './sections/ChangeHeader';
 import ChangeList from './sections/ChangeList';
@@ -21,7 +22,6 @@ const hastNodeUnrelased = (node) => {
   return {
     type: 'element',
     tagName: 'UnReleasedHeader',
-    properties: {value: 'UNRELEASED'},
     children: [toHAST(node)]
   }
 }
@@ -30,6 +30,7 @@ const hastNodeChangeHeader = (node) => {
   return {
     type: 'element',
     tagName: 'ChangeHeader',
+    properties: { onAdd: ()=>console.log('ye') },
     children: [toHAST(node)]
   }
 }
@@ -42,19 +43,19 @@ const hastNodeChangeList = (node) => {
   }
 }
 
-const toHastNodes = (children) => {
+const toHastNodes = (root) => {
   let depth;
   let unrelease = false;
-  const ret = [];
+  const children = [];
 
-  for (const node of children) {
+  for (const node of root.children) {
     const { type } = node;
     const { identifier } = node.children[0];
 
     if (type === 'heading') { // headers
 
       if (identifier === 'unreleased') { // if unreleased header, mark it to add subsections
-        ret.push(hastNodeUnrelased(node));
+        children.push(hastNodeUnrelased(node));
 
         unrelease = true;
         depth = node.depth;
@@ -66,32 +67,29 @@ const toHastNodes = (children) => {
         if (depth === node.depth) { // if got a same level header then close unrelease section
           unrelease = false;
         } else {
-          ret.push(hastNodeChangeHeader(node)); //add change headers
+          children.push(hastNodeChangeHeader(node)); //add change headers
           continue;
         }
       }
     }
 
     if (unrelease && type === 'list') {
-      ret.push(hastNodeChangeList(node)); // changes list
+      children.push(hastNodeChangeList(node)); // changes list
     } else {
-      ret.push(toHAST(node));
+      children.push(toHAST(node));
     }
   }
 
-  return ret;
-
-}
-
-const ChangelogMD = ({ root }) => {
-  const hast = {
+  return  {
     type: 'element',
     tagName: 'div',
     properties: {className: 'markdown-md'},
-    children: toHastNodes(root.children)
+    children
   };
+}
 
-  return wrapper(h, hast);
+const ChangelogMD = ({ mdast }) => {
+  return hastToReact(h, toHastNodes(mdast));
 }
 
 export default ChangelogMD;

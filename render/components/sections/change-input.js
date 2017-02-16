@@ -32,7 +32,7 @@ export default class ChangeInput extends Component {
     const { actions } = styles;
 
     return (
-      <div hidden={kind && editing !== kind }>
+      <div hidden={editing !== kind}>
         <input type="text"
           onChange={this.handleChange}
           value={text}

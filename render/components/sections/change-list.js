@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-import ChangeInput from './ChangeInput';
+import ChangeInput from './change-input';
 
 const ChangeList = ({ kind, editing, onSave, onCancel, children }) => {
   const { changeList, actions } = styles;

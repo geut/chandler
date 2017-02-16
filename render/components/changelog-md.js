@@ -4,9 +4,9 @@ import toHAST from 'mdast-util-to-hast';
 // import wrapper from 'hast-to-hyperscript';
 
 import hastToReact from '../utils/hast-to-react';
-import UnReleasedHeader from './sections/UnReleasedHeader';
-import ChangeHeader from './sections/ChangeHeader';
-import ChangeList from './sections/ChangeList';
+import UnReleasedHeader from './sections/unreleased-header';
+import ChangeHeader from './sections/change-header';
+import ChangeList from './sections/change-list';
 
 const components = {
   UnReleasedHeader,

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getChangelog, initChangelog } from '../actions'
-import Editor from '../components/editor';
+import Editor from './editor';
 import ChangelogNotFound from '../components/changelog-not-found';
 
 class Changelog extends Component {

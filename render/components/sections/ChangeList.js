@@ -1,10 +1,11 @@
 
 import React from 'react';
 
-const ChangeList = ({ value, isEditing, children }) => {
+const ChangeList = ({ kind, editing, children }) => {
+  const className = `change-list changelist-${kind}`;
   return (
-    <div className="ChangeList">
-      <input type="text" hidden={!isEditing} />
+    <div className={className}>
+      <input type="text" hidden={editing !== kind } />
       {children}
     </div>
   );

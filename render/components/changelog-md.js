@@ -26,27 +26,29 @@ const hastNodeUnrelased = (node) => {
   }
 }
 
-const hastNodeChangeHeader = (node) => {
+const hastNodeChangeHeader = (node, props) => {
   return {
     type: 'element',
     tagName: 'ChangeHeader',
-    properties: { onAdd: ()=>console.log('ye') },
+    properties: { ...props },
     children: [toHAST(node)]
   }
 }
 
-const hastNodeChangeList = (node) => {
+const hastNodeChangeList = (node, props) => {
   return {
     type: 'element',
+    properties: {...props},
     tagName: 'ChangeList',
     children: [toHAST(node)]
   }
 }
 
-const toHastNodes = (root) => {
+const toHastNodes = (root, { markEditing, editing }) => {
   let depth;
   let unrelease = false;
   const children = [];
+  let kind;
 
   for (const node of root.children) {
     const { type } = node;
@@ -60,21 +62,21 @@ const toHastNodes = (root) => {
         unrelease = true;
         depth = node.depth;
         continue;
-
       }
 
       if (unrelease) {
         if (depth === node.depth) { // if got a same level header then close unrelease section
           unrelease = false;
         } else {
-          children.push(hastNodeChangeHeader(node)); //add change headers
+          kind = node.children[0].value.toLowerCase();
+          children.push(hastNodeChangeHeader(node, { kind, markEditing })); //add change headers
           continue;
         }
       }
     }
 
     if (unrelease && type === 'list') {
-      children.push(hastNodeChangeList(node)); // changes list
+      children.push(hastNodeChangeList(node, { editing, kind })); // changes list
     } else {
       children.push(toHAST(node));
     }
@@ -88,8 +90,9 @@ const toHastNodes = (root) => {
   };
 }
 
-const ChangelogMD = ({ mdast }) => {
-  return hastToReact(h, toHastNodes(mdast));
+const ChangelogMD = ({ mdast, markEditing, editing }) => {
+console.log(mdast)
+  return hastToReact(h, toHastNodes(mdast, { markEditing, editing }));
 }
 
 export default ChangelogMD;

@@ -1,11 +1,13 @@
 
 import { send } from 'redux-electron-ipc';
 
-import { 
+import {
   PROJECT_LOAD,
   PROJECT_CLOSE,
   CHANGELOG_LOAD,
-  CHANGELOG_NOT_FOUND
+  CHANGELOG_NOT_FOUND,
+  EDITOR_EDITING,
+  EDITOR_DONE_EDITING
 } from '../constants/actions';
 
 export const closeProject = (event) => (dispatch) => {
@@ -20,6 +22,8 @@ export const getChangelog = (path) => (dispatch) => dispatch(send('changelog:loa
 
 export const initChangelog = (path) => (dispatch) => dispatch(send('changelog:init', path));
 
+export const markEditing = (event, kind) => (dispatch) => dispatch({type: EDITOR_EDITING, kind});
+
 // IPC ----
 
 export const loadProject = (event, project) => (dispatch) => {
@@ -31,7 +35,7 @@ export const loadProject = (event, project) => (dispatch) => {
 
 export const loadChangelog = (event, mdast) => dispatch => {
   return dispatch({
-    type: CHANGELOG_LOAD, 
+    type: CHANGELOG_LOAD,
     mdast
   });
 };

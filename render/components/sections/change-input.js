@@ -2,16 +2,23 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
+const kinds = [
+  { text: 'Added', value: 'added' },
+  { text: 'Changed', value: 'changed' },
+  { text: 'Fixed', value: 'fixed' }
+]
+
 export default class ChangeInput extends Component {
 
   state = {
-    text: ''
+    text: '',
+    selectedKind: 'added'
   }
 
   handleSave = (e) => {
     const { onSave, kind } = this.props;
-    const { text } = this.state;
-    onSave(kind, text);
+    const { text, selectedKind } = this.state;
+    onSave(kind !== 'any' ?  kind : selectedKind, text);
     this.setState({ text: '' });
   }
 
@@ -25,18 +32,30 @@ export default class ChangeInput extends Component {
     this.setState({text: e.target.value});
   }
 
+  handleKindChange = (e) => {
+    this.setState({selectedKind: e.target.value});
+  }
+
   render() {
     const { editing, kind } = this.props;
-    const { text } = this.state;
+    const { text, selectedKind } = this.state;
 
-    const { actions } = styles;
+    const { input, actions } = styles;
 
     return (
-      <div hidden={editing !== kind}>
+      <div className={css(input)} hidden={editing !== kind}>
         <input type="text"
           onChange={this.handleChange}
           value={text}
         />
+        {
+          kind === 'any' &&
+          <select
+            value={selectedKind}
+            onChange={this.handleKindChange}>
+            { kinds.map(({text, value})=> <option key={value} value={value}>{text}</option>) }
+          </select>
+        }
         <div className={css(actions)}>
           <button type="button" onClick={this.handleSave}>Add</button>
           <button type="button" onClick={this.handleCancel}>Cancel</button>
@@ -47,5 +66,8 @@ export default class ChangeInput extends Component {
 }
 
 const styles = StyleSheet.create({
-  actions: {}
+  actions: {},
+  input: {
+    position: 'relative'
+  }
 })

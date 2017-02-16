@@ -43,8 +43,6 @@ const styles = StyleSheet.create({
 
       background: '#fefefe',
       overflowY: 'scroll',
-      marginLeft: '20px',
-      padding: '20px'
     },
     actions: {
       display: 'flex',

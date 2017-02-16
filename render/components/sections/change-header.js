@@ -18,7 +18,7 @@ const ChangeHeader = ({ kind, onEdit, children }) => {
 export default ChangeHeader;
 
 const styles = StyleSheet.create({
-  'changeHeader': {
+  changeHeader: {
     display: 'flex',
     alignItems: 'center'
   },

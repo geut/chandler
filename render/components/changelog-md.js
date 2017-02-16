@@ -1,27 +1,30 @@
 
 import React, { Component } from 'react';
 import toHAST from 'mdast-util-to-hast';
-// import wrapper from 'hast-to-hyperscript';
+import { StyleSheet, css } from 'aphrodite';
 
 import hastToReact from '../utils/hast-to-react';
 import UnReleasedHeader from './sections/unreleased-header';
 import ChangeHeader from './sections/change-header';
 import ChangeList from './sections/change-list';
+import ChangeInput from './sections/change-input';
 
 const components = {
   UnReleasedHeader,
   ChangeHeader,
-  ChangeList
+  ChangeList,
+  ChangeInput
 }
 
 const h = (name, props, children) => {
   return React.createElement(components[name] || name, props, children);
 }
 
-const hastNodeUnrelased = (node) => {
+const hastNodeUnrelased = (node, props) => {
   return {
     type: 'element',
     tagName: 'UnReleasedHeader',
+    properties: {...props},
     children: [toHAST(node)]
   }
 }
@@ -38,8 +41,8 @@ const hastNodeChangeHeader = (node, props) => {
 const hastNodeChangeList = (node, props) => {
   return {
     type: 'element',
-    properties: {...props},
     tagName: 'ChangeList',
+    properties: {...props},
     children: [toHAST(node)]
   }
 }
@@ -48,6 +51,7 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
   let depth;
   let unrelease = false;
   const children = [];
+  const { markdownMD, mask, hidden } = styles;
   let kind;
 
   for (const node of root.children) {
@@ -57,7 +61,14 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
     if (type === 'heading') { // headers
 
       if (identifier === 'unreleased') { // if unreleased header, mark it to add subsections
-        children.push(hastNodeUnrelased(node));
+        children.push(hastNodeUnrelased(node, { onEdit }))
+        children.push(
+          {
+            type: 'element',
+            tagName: 'ChangeInput',
+            properties: { kind: 'any', editing, onSave: onSaveChange, onCancel: onCancelChange  }
+          }
+        );
 
         unrelease = true;
         depth = node.depth;
@@ -85,8 +96,15 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
   return  {
     type: 'element',
     tagName: 'div',
-    properties: {className: 'markdown-md'},
-    children
+    properties: {className: css(markdownMD) },
+    children: [
+      {
+        type: 'element',
+        tagName: 'div',
+        properties: {className: css(editing ? mask : hidden) }
+      },
+      ...children
+    ]
   };
 }
 
@@ -119,3 +137,24 @@ export default class ChangelogMD extends Component {
     return hastToReact(h, toHastNodes(mdast, { onEdit, onSaveChange, onCancelChange, editing }));
   }
 }
+
+
+const styles = StyleSheet.create({
+  mask: {
+    position: 'absolute',
+    background: 'black',
+    opacity: .6,
+    transition: 'opacity .3s',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  hidden: {
+    display: 'none'
+  },
+  markdownMD: {
+    position: 'relative',
+    padding: 20
+  }
+})

@@ -20,3 +20,8 @@ export const initChangelog = (event, dirname) => {
   init({cwd: dirname})
     .then(() => loadChangelog(event, dirname));
 };
+
+export const addChange = (event, dirname, type, msg) => {
+  change({type, msg, cwd: dirname})
+    .then(() => loadChangelog(event, dirname));
+}

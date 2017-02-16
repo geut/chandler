@@ -3,10 +3,8 @@ import React from  'react';
 import { StyleSheet, css } from 'aphrodite';
 
 
-const ChangeHeader = ({ kind, markEditing, children }) => {
-
-  // const handler = (e) => (markEditing(e, kind)); //wrap action creator to bind kind parameter
-  const handler = markEditing(kind);
+const ChangeHeader = ({ kind, onEdit, children }) => {
+  const handler = onEdit(kind);
   const { changeHeader, action } = styles;
 
   return (

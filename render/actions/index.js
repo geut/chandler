@@ -20,6 +20,9 @@ export const getChangelog = (path) => (dispatch) => dispatch(send('changelog:loa
 
 export const initChangelog = (path) => (dispatch) => dispatch(send('changelog:init', path));
 
+export const addChange = (kind, text, dirname) => (dispatch) => dispatch(send('changelog:change', dirname, kind, text));
+
+
 // IPC ----
 
 export const loadProject = (event, project) => (dispatch) => {

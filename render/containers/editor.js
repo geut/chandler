@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 
 import ChangelogMD from '../components/changelog-md';
+import { addChange } from '../actions';
 
-const Editor = ({ mdast }) => {
+const Editor = ({ mdast, path, addChange }) => {
   const { container, content, actions, action } = styles;
 
   return (
     <div className={css(container)}>
 
       <div className={css(content)}>
-        <ChangelogMD mdast={mdast} />
+        <ChangelogMD mdast={mdast} onAddChange={addChange} path={path}/>
       </div>
 
       <div className={css(actions)}>
@@ -22,7 +23,9 @@ const Editor = ({ mdast }) => {
   );
 }
 
-export default connect((state) => state)(Editor);
+const mapStateToProps = ({ project }) => ({ path: project.path });
+
+export default connect(mapStateToProps, { addChange })(Editor);
 
 
 const styles = StyleSheet.create({

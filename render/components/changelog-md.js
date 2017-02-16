@@ -44,7 +44,7 @@ const hastNodeChangeList = (node, props) => {
   }
 }
 
-const toHastNodes = (root, { markEditing, editing }) => {
+const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) => {
   let depth;
   let unrelease = false;
   const children = [];
@@ -69,14 +69,14 @@ const toHastNodes = (root, { markEditing, editing }) => {
           unrelease = false;
         } else {
           kind = node.children[0].value.toLowerCase();
-          children.push(hastNodeChangeHeader(node, { kind, markEditing })); //add change headers
+          children.push(hastNodeChangeHeader(node, { kind, onEdit  })); //add change headers
           continue;
         }
       }
     }
 
     if (unrelease && type === 'list') {
-      children.push(hastNodeChangeList(node, { editing, kind })); // changes list
+      children.push(hastNodeChangeList(node, { editing, kind, onSave: onSaveChange, onCancel: onCancelChange })); // changes list
     } else {
       children.push(toHAST(node));
     }
@@ -90,32 +90,32 @@ const toHastNodes = (root, { markEditing, editing }) => {
   };
 }
 
-// const ChangelogMD = ({ mdast, markEditing, editing }) => {
-// console.log(mdast)
-//   return hastToReact(h, toHastNodes(mdast, { markEditing, editing }));
-// }
-
-
 
 export default class ChangelogMD extends Component {
 
-  constructor() {
-    super();
-    this.showEditingHandler = this.showEditingHandler.bind(this);
-    this.state = {
-      editing: null
-    }
+  state = {
+    editing: null
   }
 
-  showEditingHandler (kind) {
+  onEdit = (kind) => {
     return (e) => this.setState({editing: kind});
   }
 
+  onSaveChange = (kind, text) => {
+    const { onAddChange, path } = this.props;
+    onAddChange(kind, text, path);
+    this.setState({ editing: null });
+  }
+
+  onCancelChange = () => {
+      this.setState({ editing: null });
+  }
+
   render() {
-    const { showEditingHandler } = this;
+    const { onEdit, onSaveChange, onCancelChange } = this;
     const { mdast } = this.props;
     const { editing } = this.state;
 
-    return hastToReact(h, toHastNodes(mdast, { markEditing: showEditingHandler, editing }));
+    return hastToReact(h, toHastNodes(mdast, { onEdit, onSaveChange, onCancelChange, editing }));
   }
 }

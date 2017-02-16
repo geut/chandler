@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 
 const Dashboard = ({onOpenProject}) => {
-  const {container, header, title, headline, actions} = styles;
+  const { container, header, title, headline, actions, button } = styles;
   return (
     <div className={css(container)}>
       <div className={css(header)}>
@@ -12,7 +12,7 @@ const Dashboard = ({onOpenProject}) => {
         <div className={css(headline)}>Changelog Handler &amp; Helper</div>
       </div>
       <div className={css(actions)}>
-        <button type="button" onClick={onOpenProject}>Open</button>
+        <button className={css(button)} type="button" onClick={onOpenProject}>Open</button>
       </div>
     </div>
   );
@@ -46,5 +46,14 @@ const styles = StyleSheet.create({
   actions: {
     flex: '1 0 0',
     textAlign: 'center'
+  },
+  button: {
+    borderRadius: 8,
+    background: '#314052',
+    minWidth: 100,
+    minHeight: 50,
+    color: 'white',
+    border: 'none',
+    fontSize: 14
   }
 });

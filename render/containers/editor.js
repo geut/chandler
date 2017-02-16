@@ -4,31 +4,25 @@ import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 
 import ChangelogMD from '../components/changelog-md';
-import { markEditing } from '../actions';
 
-const Editor = ({ mdast, markEditing, editing }) => {
+const Editor = ({ mdast }) => {
   const { container, content, actions, action } = styles;
 
   return (
     <div className={css(container)}>
 
       <div className={css(content)}>
-        <ChangelogMD mdast={mdast} markEditing={markEditing} editing={editing}/>
+        <ChangelogMD mdast={mdast} />
       </div>
 
       <div className={css(actions)}>
-        <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Changes</button>
         <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Release</button>
       </div>
   </div>
   );
 }
 
-const mapStateToProps = ({ editor }) => ({
-  editing: editor.editing
-});
-
-export default connect(mapStateToProps, { markEditing })(Editor);
+export default connect((state) => state)(Editor);
 
 
 const styles = StyleSheet.create({

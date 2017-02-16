@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 import toHAST from 'mdast-util-to-hast';
 // import wrapper from 'hast-to-hyperscript';
 
@@ -90,9 +90,32 @@ const toHastNodes = (root, { markEditing, editing }) => {
   };
 }
 
-const ChangelogMD = ({ mdast, markEditing, editing }) => {
-console.log(mdast)
-  return hastToReact(h, toHastNodes(mdast, { markEditing, editing }));
-}
+// const ChangelogMD = ({ mdast, markEditing, editing }) => {
+// console.log(mdast)
+//   return hastToReact(h, toHastNodes(mdast, { markEditing, editing }));
+// }
 
-export default ChangelogMD;
+
+
+export default class ChangelogMD extends Component {
+
+  constructor() {
+    super();
+    this.showEditingHandler = this.showEditingHandler.bind(this);
+    this.state = {
+      editing: null
+    }
+  }
+
+  showEditingHandler (kind) {
+    return (e) => this.setState({editing: kind});
+  }
+
+  render() {
+    const { showEditingHandler } = this;
+    const { mdast } = this.props;
+    const { editing } = this.state;
+
+    return hastToReact(h, toHastNodes(mdast, { markEditing: showEditingHandler, editing }));
+  }
+}

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     content: {
       flex: '1 0 0',
       overflowY: 'scroll',
-      padding: '10px 0 0 20px'
+      padding: '10px 0 20px 20px'
     },
     actions: {
       display: 'flex',

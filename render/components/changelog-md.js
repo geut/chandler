@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   markdownMD: {
     position: 'relative',
-    padding: '0 20px',
+    padding: '0 20px 20px',
     background: 'white',
     border: '1px solid #f0f0f0'
   }

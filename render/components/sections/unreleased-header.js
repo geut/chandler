@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   action: {
-    marginLeft: 10
+    margin: '5px 0 0 10px',
+    fontSize: 16
   }
 });
 

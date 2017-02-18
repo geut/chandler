@@ -96,7 +96,7 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
   return  {
     type: 'element',
     tagName: 'div',
-    properties: {className: css(markdownMD) },
+    properties: {className: [css(markdownMD), 'markdown-body'] },
     children: [
       {
         type: 'element',

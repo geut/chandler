@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     background: '#181818',
     opacity: .4,
-    transition: 'opacity .6s',
     top: 0,
     bottom: 0,
     left: 0,
@@ -155,6 +154,8 @@ const styles = StyleSheet.create({
   },
   markdownMD: {
     position: 'relative',
-    padding: 20
+    padding: '0 20px',
+    background: 'white',
+    border: '1px solid #f0f0f0'
   }
 })

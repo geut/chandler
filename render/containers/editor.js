@@ -35,8 +35,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       flex: '1',
-
-      background: '#f0f0f0'
+      background: '#f9f9f9'
     },
     content: {
       flex: '1 0 0',

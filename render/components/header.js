@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { StyleSheet, css } from 'aphrodite'; 
+import { StyleSheet, css } from 'aphrodite';
 
 const Header = (props) => {
   const { project, onCloseProject } = props;
@@ -11,7 +11,7 @@ const Header = (props) => {
   return (
     <div className={css(toolbar)}>
       <div className={css(title)}>
-        <i className="fa fa-folder-open-o"/> {name} <span className={css(lighter)}> v{version}</span>            
+        <i className="fa fa-folder-open-o"/> {name} <span className={css(lighter)}> v{version}</span>
       </div>
       <div className={css(actions)}>
         <button type="button" onClick={onCloseProject}>Close</button>
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   toolbar: {
     borderTop: '2px solid orange',
     borderBottom: '1px solid #ccc',
+    boxShadow: '0 0 4px #ccc',
     minHeight: 60,
     position: 'relative',
     background: '#f9f9f9',
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    
+
     flex: 'none'
 
   },
@@ -55,5 +56,5 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     padding: 15
   }
-  
+
 });

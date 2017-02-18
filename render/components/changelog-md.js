@@ -56,9 +56,9 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
 
   for (const node of root.children) {
     const { type } = node;
-    const { identifier } = node.children[0];
 
     if (type === 'heading') { // headers
+      const { identifier } = node.children[0];
 
       if (identifier === 'unreleased') { // if unreleased header, mark it to add subsections
         children.push(hastNodeUnrelased(node, { onEdit }))

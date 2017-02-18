@@ -142,9 +142,9 @@ export default class ChangelogMD extends Component {
 const styles = StyleSheet.create({
   mask: {
     position: 'absolute',
-    background: 'black',
-    opacity: .6,
-    transition: 'opacity .3s',
+    background: '#181818',
+    opacity: .4,
+    transition: 'opacity .6s',
     top: 0,
     bottom: 0,
     left: 0,

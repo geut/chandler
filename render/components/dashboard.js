@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   button: {
-    borderRadius: 8,
-    background: '#314052',
-    minWidth: 100,
+    // borderRadius: 8,
+    // background: '#314052',
+    minWidth: '90%',
     minHeight: 50,
-    color: 'white',
+    // color: 'white',
     border: 'none',
     fontSize: 14
   }

@@ -7,7 +7,7 @@ import ChangelogMD from '../components/changelog-md';
 import { addChange } from '../actions';
 
 const Editor = ({ mdast, path, addChange }) => {
-  const { container, content, actions, action } = styles;
+  const { container, content } = styles;
 
   return (
     <div className={css(container)}>
@@ -16,9 +16,6 @@ const Editor = ({ mdast, path, addChange }) => {
         <ChangelogMD mdast={mdast} onAddChange={addChange} path={path}/>
       </div>
 
-      <div className={css(actions)}>
-        <button type="button" className={css(action)}> <i className="fa fa-folder-open-o"/>Release</button>
-      </div>
   </div>
   );
 }
@@ -40,17 +37,6 @@ const styles = StyleSheet.create({
     content: {
       flex: '1 0 0',
       overflowY: 'scroll',
-      padding: '10px 0 20px 20px'
-    },
-    actions: {
-      display: 'flex',
-      alignItems: 'stretch',
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-      flex: '0 0',
-      padding: '10px'
-    },
-    action: {
-      margin: '2px 5px'
+      padding: '10px 20px 20px'
     }
 });

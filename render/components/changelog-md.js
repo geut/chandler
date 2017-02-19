@@ -156,6 +156,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     padding: '0 20px 20px',
     background: 'white',
-    border: '1px solid #f0f0f0'
+    border: '1px solid orange'
   }
 })

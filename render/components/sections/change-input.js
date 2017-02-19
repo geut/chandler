@@ -40,28 +40,33 @@ export default class ChangeInput extends Component {
     const { editing, kind } = this.props;
     const { text, selectedKind } = this.state;
 
-    const { input, actions, inputText, options } = styles;
+    const { container, actions, input, options } = styles;
     const isOpen = editing === kind;
     return (
       <div>
       {
         isOpen &&
-        <div className={css(input)} >
-          <input
-            type="text"
-            className={css(inputText)}
-            onChange={this.handleChange}
-            value={text}
-          />
+        <div className={css(container)} >
           {
             kind === 'any' &&
+          <div>
             <select
-              className={css(inputText, options)}
+              className={css(options)}
               value={selectedKind}
               onChange={this.handleKindChange}>
               { kinds.map(({text, value})=> <option key={value} value={value}>{text}</option>) }
             </select>
+          </div>
           }
+          <div>
+            <textarea
+              type="text"
+              className={css(input)}
+              onChange={this.handleChange}
+              rows="10"
+              value={text}
+            />
+          </div>
           <div className={css(actions)}>
             <button type="button" onClick={this.handleSave}>Add</button>
             <button type="button" onClick={this.handleCancel}>Cancel</button>
@@ -77,21 +82,23 @@ const styles = StyleSheet.create({
   actions: {
 
   },
-  input: {
+  container: {
     position: 'relative',
     background: '#fefefe',
-    display: 'inline-block',
     border: '1px solid #ddd',
     boxShadow: '1px 1px 3px black',
     padding: '10px 20px',
     borderRadius: 5
   },
-  options: {
-    marginLeft: 5
+  input: {
+    ':focus':{
+      background: '#fefefe',
+    },
+    background: '#f0f0f0',
+    width: '100%'
   },
-  inputText: {
-    fontSize: 16,
-    border: 'none',
-    borderBottom: '1px solid #e0e0e0'
+  options: {
+    width: '100%'
+    // marginLeft: 5
   }
-})
+});

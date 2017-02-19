@@ -101,7 +101,7 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
       {
         type: 'element',
         tagName: 'div',
-        properties: {className: css(editing ? mask : hidden) }
+        properties: {className: css(editing ? mask : hidden), onClick: (e) => onCancelChange() }
       },
       ...children
     ]

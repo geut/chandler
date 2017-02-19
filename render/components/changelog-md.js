@@ -42,7 +42,7 @@ const hastNodeChangeList = (node, props) => {
   return {
     type: 'element',
     tagName: 'ChangeList',
-    properties: {...props},
+    properties: { ...props },
     children: [toHAST(node)]
   }
 }
@@ -61,7 +61,7 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
       const { identifier } = node.children[0];
 
       if (identifier === 'unreleased') { // if unreleased header, mark it to add subsections
-        children.push(hastNodeUnrelased(node, { onEdit }))
+        children.push(hastNodeUnrelased(node, { editing, onEdit }))
         children.push(
           {
             type: 'element',
@@ -80,7 +80,7 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
           unrelease = false;
         } else {
           kind = node.children[0].value.toLowerCase();
-          children.push(hastNodeChangeHeader(node, { kind, onEdit  })); //add change headers
+          children.push(hastNodeChangeHeader(node, { kind, editing, onEdit  })); //add change headers
           continue;
         }
       }
@@ -142,8 +142,6 @@ export default class ChangelogMD extends Component {
 const styles = StyleSheet.create({
   mask: {
     position: 'absolute',
-    background: '#181818',
-    opacity: .4,
     top: 0,
     bottom: 0,
     left: 0,

@@ -2,15 +2,19 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-const UnReleasedHeader = ({ children, onEdit }) => {
-  const handler = onEdit('any');
+const UnReleasedHeader = ({ editing, onEdit, children }) => {
+  const kind = 'any';
+  const handler = onEdit(kind);
 
-  const { unreleaseHeader, action } = styles;
+  const { unreleaseHeader, action, selected } = styles;
 
   return (
     <div className={css(unreleaseHeader)}>
       {children}
-      <button className={css(action)} type="button" onClick={handler}>+</button>
+      {
+        editing !== kind &&
+        <button className={css(action)} type="button" onClick={handler}>+</button>
+      }
     </div>
   );
 }

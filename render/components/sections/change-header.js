@@ -3,14 +3,17 @@ import React from  'react';
 import { StyleSheet, css } from 'aphrodite';
 
 
-const ChangeHeader = ({ kind, onEdit, children }) => {
+const ChangeHeader = ({ kind, onEdit, editing, children }) => {
   const handler = onEdit(kind);
   const { changeHeader, action } = styles;
 
   return (
     <div className={css(changeHeader)}>
       {children}
-      <button className={css(action)} type="button" onClick={handler}>+</button>
+      {
+        editing !== kind &&
+        <button className={css(action)} type="button" onClick={handler}>+</button>
+      }
     </div>
   );
 }

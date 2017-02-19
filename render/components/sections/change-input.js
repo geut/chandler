@@ -87,11 +87,28 @@ const styles = StyleSheet.create({
   },
   container: {
     position: 'relative',
-    background: '#fefefe',
-    border: '1px solid #ddd',
-    boxShadow: '1px 1px 3px black',
-    padding: '10px 20px',
-    borderRadius: 5
+    background: '#f9f9f9',
+    padding: '20px 20px',
+    margin: '-10px -20px 5px -20px',
+    boxShadow: 'inset 0 0 2px silver',
+    borderTop: '1px solid silver',
+    ':after': {
+      content: '" "',
+      position: 'absolute',
+      top: -2,
+      borderRight: '10px solid transparent',
+      borderLeft: '10px solid transparent',
+      borderTop: '10px solid white'
+    },
+    ':before': {
+      content: '" "',
+      position: 'absolute',
+      top: 0,
+      borderRight: '10px solid transparent',
+      borderLeft: '10px solid transparent',
+      borderTop: '10px solid silver'
+    }
+
   },
   input: {
     ':focus':{

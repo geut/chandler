@@ -5,7 +5,10 @@ import { StyleSheet, css } from 'aphrodite';
 const kinds = [
   { text: 'Added', value: 'added' },
   { text: 'Changed', value: 'changed' },
-  { text: 'Fixed', value: 'fixed' }
+  { text: 'Fixed', value: 'fixed' },
+  { text: 'Removed', value: 'removed' },
+  { text: 'Deprecated', value: 'deprecated' },
+  { text: 'Security', value: 'security' }
 ]
 
 export default class ChangeInput extends Component {

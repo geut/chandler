@@ -97,14 +97,7 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
     type: 'element',
     tagName: 'div',
     properties: {className: [css(markdownMD), 'markdown-body'] },
-    children: [
-      {
-        type: 'element',
-        tagName: 'div',
-        properties: {className: css(editing ? mask : hidden), onClick: (e) => onCancelChange() }
-      },
-      ...children
-    ]
+    children
   };
 }
 
@@ -140,16 +133,6 @@ export default class ChangelogMD extends Component {
 
 
 const styles = StyleSheet.create({
-  mask: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0
-  },
-  hidden: {
-    display: 'none'
-  },
   markdownMD: {
     position: 'relative',
     padding: '0 20px 20px',

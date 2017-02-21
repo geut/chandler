@@ -52,10 +52,15 @@ export default class ChangeInput extends Component {
     const { editing, kind } = this.props;
     const { text, selectedKind } = this.state;
 
-    const { container, actions, input, options } = styles;
+    const { modal, container, actions, input, options } = styles;
     const isOpen = (editing === kind);
+
     return (
       <div>
+      {
+        isOpen &&
+        <div className={css(modal)} onClick={this.handleCancel}></div>
+      }
       {
         isOpen &&
         <div className={css(container)} >
@@ -91,6 +96,13 @@ export default class ChangeInput extends Component {
 }
 
 const styles = StyleSheet.create({
+  modal: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
   actions: {
 
   },

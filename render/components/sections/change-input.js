@@ -13,22 +13,31 @@ const kinds = [
 
 export default class ChangeInput extends Component {
 
-  state = {
+  initialState = {
     text: '',
     selectedKind: 'added'
+  }
+
+  state = {
+    ...this.initialState
+  }
+
+  resetState = () => {
+    const { initialState } = this;
+    this.setState( initialState );
   }
 
   handleSave = (e) => {
     const { onSave, kind } = this.props;
     const { text, selectedKind } = this.state;
     onSave(kind !== 'any' ?  kind : selectedKind, text);
-    this.setState({ text: '' });
+    this.resetState();
   }
 
   handleCancel = (e) => {
     const { onCancel } = this.props;
     onCancel();
-    this.setState({ text: '' });
+    this.resetState();
   }
 
   handleChange = (e) => {
@@ -44,7 +53,7 @@ export default class ChangeInput extends Component {
     const { text, selectedKind } = this.state;
 
     const { container, actions, input, options } = styles;
-    const isOpen = editing === kind;
+    const isOpen = (editing === kind);
     return (
       <div>
       {

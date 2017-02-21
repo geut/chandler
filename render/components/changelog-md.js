@@ -135,7 +135,7 @@ export default class ChangelogMD extends Component {
 const styles = StyleSheet.create({
   markdownMD: {
     position: 'relative',
-    padding: '0 20px 20px',
+    padding: '20px 20px',
     background: 'white',
     border: '1px solid orange'
   }

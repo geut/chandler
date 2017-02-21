@@ -12,7 +12,7 @@ const Dashboard = ({onOpenProject}) => {
         <div className={css(headline)}>Changelog Handler &amp; Helper</div>
       </div>
       <div className={css(actions)}>
-        <button className={css(button)} type="button" onClick={onOpenProject}>Open</button>
+        <button className={css(button)} type="button" onClick={onOpenProject}>Open Project</button>
       </div>
     </div>
   );

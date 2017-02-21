@@ -11,7 +11,7 @@ import { closeProject } from '../actions';
 const Main = ({ project, closeProject }) => (
   <div className={css(main)}>
     <Header project={project} onCloseProject={closeProject} />
-    <Changelog />
+    <Changelog path={project.path}/>
   </div>
 );
 

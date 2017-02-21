@@ -6,7 +6,7 @@ import { dialog } from 'electron';
 const showOpenDialog =  (cb) => {
     dialog.showOpenDialog(
     { properties: ['openDirectory'] },
-    (dir) => {  
+    (dir) => {
       if (dir && dir.length) {
        cb(dir[0]);
       }
@@ -16,13 +16,15 @@ const showOpenDialog =  (cb) => {
 
 const readPackageJson = (sender, dirname) => {
 
+  sender.send('project:beforeload');
+
   readFile(resolve(dirname, 'package.json'), 'utf8', (err, data) => {
     if (err) return; // #todo
 
     const pkg = JSON.parse(data);
-    
+
     pkg.path = dirname;
-    
+
     sender.send('project:loaded', pkg);
 
   });

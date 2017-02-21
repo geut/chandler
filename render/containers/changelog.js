@@ -14,6 +14,7 @@ class Changelog extends Component {
       getChangelog(path);
     }
 
+
     render() {
       const { loaded, loading, initChangelog, path, mdast } = this.props;
 
@@ -27,10 +28,9 @@ class Changelog extends Component {
 };
 
 
-const mapStateToProps = ({ project, changelog }) => ({
+const mapStateToProps = ({ changelog }) => ({
   loaded: changelog.loaded,
   loading: changelog.loading,
-  path: project.path,
   source: changelog.source,
   mdast: changelog.mdast
 });

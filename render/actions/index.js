@@ -8,11 +8,7 @@ import {
   CHANGELOG_NOT_FOUND
 } from '../constants/actions';
 
-export const closeProject = (event) => (dispatch) => {
-  return dispatch({
-    type: PROJECT_CLOSE
-  });
-};
+export const closeProject = (event) => (dispatch) => dispatch({type: PROJECT_CLOSE});
 
 export const openProject = (event) => (dispatch) => dispatch(send('project:open'));
 
@@ -25,22 +21,8 @@ export const addChange = (kind, text, dirname) => (dispatch) => dispatch(send('c
 
 // IPC ----
 
-export const loadProject = (event, project) => (dispatch) => {
-  return dispatch({
-    type: PROJECT_LOAD,
-    project
-  });
-};
+export const loadProject = (event, project) => (dispatch) => dispatch({type: PROJECT_LOAD, project});
 
-export const loadChangelog = (event, mdast) => dispatch => {
-  return dispatch({
-    type: CHANGELOG_LOAD,
-    mdast
-  });
-};
+export const loadChangelog = (event, mdast) => dispatch => dispatch({type: CHANGELOG_LOAD, mdast});
 
-export const changelogNotFound = (event, changelog) => dispatch => {
-  return dispatch({
-    type: CHANGELOG_NOT_FOUND
-  });
-};
+export const changelogNotFound = (event, changelog) => dispatch => dispatch({type: CHANGELOG_NOT_FOUND});

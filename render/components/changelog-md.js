@@ -119,7 +119,7 @@ export default class ChangelogMD extends Component {
   }
 
   onCancelChange = () => {
-      this.setState({ editing: null });
+    this.setState({ editing: null });
   }
 
   render() {

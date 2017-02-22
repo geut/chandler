@@ -22,45 +22,47 @@ const h = (name, props, children) => {
 
 const hastNodeUnrelased = (node, props) => {
   return {
-    type: 'element',
+    ...node,
     tagName: 'UnReleasedHeader',
-    properties: {...props},
-    children: [toHAST(node)]
+    properties: { ...props },
+
   }
 }
 
 const hastNodeChangeHeader = (node, props) => {
+  console.log(props)
   return {
-    type: 'element',
+    ...node,
     tagName: 'ChangeHeader',
-    properties: { ...props },
-    children: [toHAST(node)]
+    properties: { ...props }
   }
 }
 
 const hastNodeChangeList = (node, props) => {
+  console.log(props)
   return {
-    type: 'element',
+    ...node,
     tagName: 'ChangeList',
-    properties: { ...props },
-    children: [toHAST(node)]
+    properties: { ...props }
   }
 }
 
-const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) => {
-  let depth;
-  let unrelease = false;
+const toHastNodes = (mdast, { onEdit, editing, onSaveChange, onCancelChange }) => {
+  const root = toHAST(mdast);
   const children = [];
   const { markdownMD, mask, hidden } = styles;
+  let unrelease = false;
+  let unrelase_found  = false;
   let kind;
 
+
   for (const node of root.children) {
-    const { type } = node;
+    const { tagName } = node;
 
-    if (type === 'heading') { // headers
-      const { identifier } = node.children[0];
+    if (tagName === 'h2') { // release headers
 
-      if (identifier === 'unreleased') { // if unreleased header, mark it to add subsections
+      if (!unrelase_found) { // if unreleased header, mark it to add subsections
+
         children.push(hastNodeUnrelased(node, { editing, onEdit }))
         children.push(
           {
@@ -70,26 +72,29 @@ const toHastNodes = (root, { onEdit, editing, onSaveChange, onCancelChange }) =>
           }
         );
 
-        unrelease = true;
-        depth = node.depth;
+        unrelease = unrelase_found = true;
         continue;
       }
 
       if (unrelease) {
-        if (depth === node.depth) { // if got a same level header then close unrelease section
           unrelease = false;
-        } else {
-          kind = node.children[0].value.toLowerCase();
-          children.push(hastNodeChangeHeader(node, { kind, editing, onEdit  })); //add change headers
-          continue;
-        }
       }
     }
 
-    if (unrelease && type === 'list') {
-      children.push(hastNodeChangeList(node, { editing, kind, onSave: onSaveChange, onCancel: onCancelChange })); // changes list
+    if (unrelease) {
+      switch(tagName) {
+        case 'h3':
+          kind = node.children[0].value.toLowerCase();
+          children.push(hastNodeChangeHeader(node, { kind, editing, onEdit })); //add change headers
+          break;
+        case 'ul':
+          children.push(hastNodeChangeList(node, { kind, editing, onSave: onSaveChange, onCancel: onCancelChange })); // changes list
+          break;
+        default:
+          children.push(node);
+      }
     } else {
-      children.push(toHAST(node));
+      children.push(node);
     }
   }
 
@@ -126,7 +131,7 @@ export default class ChangelogMD extends Component {
     const { onEdit, onSaveChange, onCancelChange } = this;
     const { mdast } = this.props;
     const { editing } = this.state;
-
+console.log(mdast)
     return hastToReact(h, toHastNodes(mdast, { onEdit, onSaveChange, onCancelChange, editing }));
   }
 }

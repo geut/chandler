@@ -6,12 +6,11 @@ import ChangeInput from './change-input';
 
 const ChangeList = ({ kind, editing, onSave, onCancel, children }) => {
   const { changeList, actions } = styles;
-
   return (
-    <div className={css(changeList)}>
+    <ul className={css(changeList)}>
       <ChangeInput onCancel={onCancel} onSave={onSave} kind={kind} editing={editing} />
       {children}
-    </div>
+    </ul>
   );
 
 };

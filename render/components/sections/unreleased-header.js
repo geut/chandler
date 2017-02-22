@@ -9,13 +9,13 @@ const UnReleasedHeader = ({ editing, onEdit, children }) => {
   const { unreleaseHeader, action, selected } = styles;
 
   return (
-    <div className={css(unreleaseHeader)}>
+    <h2 className={css(unreleaseHeader)}>
       {children}
       {
         editing !== kind &&
         <button className={css(action)} type="button" onClick={handler}>+</button>
       }
-    </div>
+    </h2>
   );
 }
 

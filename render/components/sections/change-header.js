@@ -8,13 +8,13 @@ const ChangeHeader = ({ kind, onEdit, editing, children }) => {
   const { changeHeader, action } = styles;
 
   return (
-    <div className={css(changeHeader)}>
+    <h3 className={css(changeHeader)}>
       {children}
       {
         editing !== kind &&
         <button className={css(action)} type="button" onClick={handler}>+</button>
       }
-    </div>
+    </h3>
   );
 }
 

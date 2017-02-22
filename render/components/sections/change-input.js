@@ -51,7 +51,6 @@ export default class ChangeInput extends Component {
   render() {
     const { editing, kind } = this.props;
     const { text, selectedKind } = this.state;
-
     const { modal, container, actions, input, options } = styles;
     const isOpen = (editing === kind);
 

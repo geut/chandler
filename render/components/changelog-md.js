@@ -30,7 +30,6 @@ const hastNodeUnrelased = (node, props) => {
 }
 
 const hastNodeChangeHeader = (node, props) => {
-  console.log(props)
   return {
     ...node,
     tagName: 'ChangeHeader',
@@ -39,7 +38,6 @@ const hastNodeChangeHeader = (node, props) => {
 }
 
 const hastNodeChangeList = (node, props) => {
-  console.log(props)
   return {
     ...node,
     tagName: 'ChangeList',
@@ -131,7 +129,7 @@ export default class ChangelogMD extends Component {
     const { onEdit, onSaveChange, onCancelChange } = this;
     const { mdast } = this.props;
     const { editing } = this.state;
-console.log(mdast)
+
     return hastToReact(h, toHastNodes(mdast, { onEdit, onSaveChange, onCancelChange, editing }));
   }
 }

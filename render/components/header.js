@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 const Header = (props) => {
   const { project, onCloseProject } = props;
-  const { toolbar, lighter, title, actions } = styles;
+  const { toolbar, lighter, title, actions, action } = styles;
 
   const { name, path, version } = project;
 
@@ -14,7 +14,7 @@ const Header = (props) => {
         <i className="fa fa-folder-open-o"/> {name} <span className={css(lighter)}> v{version}</span>
       </div>
       <div className={css(actions)}>
-        <button type="button" onClick={onCloseProject}>Close</button>
+        <button type="button" className={css(action)} onClick={onCloseProject}>Close</button>
       </div>
     </div>
   );
@@ -52,9 +52,13 @@ const styles = StyleSheet.create({
   },
   actions: {
     flex: '1 0 0',
-
     textAlign: 'right',
-    padding: 15
+    padding: '0 20px'
+  },
+  action: {
+    fontSize: 12,
+    lineHeight: '18px',
+    minWidth: 55
   }
 
 });

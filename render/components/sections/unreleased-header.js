@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   action: {
-    margin: '5px 0 0 10px',
-    fontSize: 16
+    margin: '0 10px',
+    fontSize: 14
   }
 });
 

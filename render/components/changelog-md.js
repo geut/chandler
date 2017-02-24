@@ -53,7 +53,6 @@ const toHastNodes = (mdast, { onEdit, editing, onSaveChange, onCancelChange }) =
   let unrelase_found  = false;
   let kind;
 
-
   for (const node of root.children) {
     const { tagName } = node;
 
@@ -61,8 +60,8 @@ const toHastNodes = (mdast, { onEdit, editing, onSaveChange, onCancelChange }) =
 
       if (!unrelase_found) { // if unreleased header, mark it to add subsections
 
-        children.push(hastNodeUnrelased(node, { editing, onEdit }))
         children.push(
+          hastNodeUnrelased(node, { editing, onEdit }),
           {
             type: 'element',
             tagName: 'ChangeInput',

@@ -20,7 +20,10 @@ const Editor = ({ mdast, path, addChange }) => {
   );
 }
 
-const mapStateToProps = ({ project }) => ({ path: project.path });
+const mapStateToProps = ({ project, changelog }) => ({
+  path: project.path,
+  mdast: changelog.mdast
+});
 
 export default connect(mapStateToProps, { addChange })(Editor);
 

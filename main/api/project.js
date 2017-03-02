@@ -1,6 +1,6 @@
 
 import { resolve } from 'path';
-import { readFile, stat } from 'fs';
+import { readFile, statSync } from 'fs';
 import { dialog } from 'electron';
 
 const showOpenDialog =  (cb) => {
@@ -18,8 +18,16 @@ const readPackageJson = (sender, dirname) => {
 
   sender.send('project:beforeload');
 
+  if (!statSync(resolve(dirname))) {
+        sender.send('project:error', `${dirname} does not exists.`);
+        return;
+  }
+
   readFile(resolve(dirname, 'package.json'), 'utf8', (err, data) => {
-    if (err) return; // #todo
+    if (err) {
+        sender.send('project:error', `No package.json found in ${dirname}`);
+        return;
+    }
 
     const pkg = JSON.parse(data);
 

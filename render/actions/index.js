@@ -5,7 +5,8 @@ import {
   PROJECT_LOAD,
   PROJECT_CLOSE,
   CHANGELOG_LOAD,
-  CHANGELOG_NOT_FOUND
+  CHANGELOG_NOT_FOUND,
+  ERROR
 } from '../constants/actions';
 
 export const closeProject = (event) => (dispatch) => dispatch({type: PROJECT_CLOSE});
@@ -26,3 +27,5 @@ export const loadProject = (event, project) => (dispatch) => dispatch({type: PRO
 export const loadChangelog = (event, mdast) => dispatch => dispatch({type: CHANGELOG_LOAD, mdast});
 
 export const changelogNotFound = (event, changelog) => dispatch => dispatch({type: CHANGELOG_NOT_FOUND});
+
+export const errorOcurred = (event, message) => (dispatch) => dispatch({type: ERROR, message});

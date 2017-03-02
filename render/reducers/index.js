@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 
 import project from './project';
 import changelog from './changelog';
+import error from './error';
 
 import { PROJECT_CLOSE } from '../constants/actions';
 
@@ -16,5 +17,6 @@ export default (state, action) => {
 
 const appReducer = combineReducers({
   project,
-  changelog
+  changelog,
+  error
 });

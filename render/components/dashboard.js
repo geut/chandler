@@ -2,6 +2,7 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
+import OpenRecent from './open-recent';
 
 const Dashboard = ({ onOpenProject, onOpenRecent, recent }) => {
   const {
@@ -9,6 +10,8 @@ const Dashboard = ({ onOpenProject, onOpenRecent, recent }) => {
     main, recentProjects,
     header, title, headline, actions, button
   } = styles;
+
+  const showRecent = !!(recent && recent.length);
 
   return (
     <div className={css(container)}>
@@ -22,15 +25,8 @@ const Dashboard = ({ onOpenProject, onOpenRecent, recent }) => {
         </div>
       </div>
       {
-        recent && recent.length &&
-        <div className={css(recentProjects)}>
-          <div>Open Recent...</div>
-          <ul>
-          {
-            recent.map((project, index) => <li key={index} onClick={(e) => onOpenRecent(project.path)}>{project.name}</li>)
-          }
-          </ul>
-        </div>
+        showRecent &&
+        <OpenRecent className={css(recentProjects)} recent={recent} onOpenRecent={onOpenRecent} />
       }
     </div>
   );
@@ -54,7 +50,8 @@ const styles = StyleSheet.create({
   },
   recentProjects: {
     alignItems: 'center',
-    flex: 1
+    flex: 1,
+    background: '#f0f0f0'
   },
   header: {
     flex: '2 0 0',

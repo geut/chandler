@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   button: {
     minWidth: '90%',
     minHeight: 50,
-    fontSize: 14
+    fontSize: 14,
+    background: '#e4e4e4'
   }
 });

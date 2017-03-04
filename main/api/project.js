@@ -1,6 +1,6 @@
 
 import { resolve } from 'path';
-import { readFile, statSync } from 'fs';
+import { readFile, existsSync } from 'fs';
 import { dialog } from 'electron';
 
 const showOpenDialog =  (cb) => {
@@ -18,9 +18,9 @@ const readPackageJson = (sender, dirname) => {
 
   sender.send('project:beforeload');
 
-  if (!statSync(resolve(dirname))) {
-        sender.send('project:error', `${dirname} does not exists.`);
-        return;
+  if (!existsSync(resolve(dirname))) {
+    sender.send('project:error', `${dirname} does not exists.`);
+    return;
   }
 
   readFile(resolve(dirname, 'package.json'), 'utf8', (err, data) => {
@@ -43,3 +43,6 @@ export const openProject = (eventOrFocusedWindow) => {
   showOpenDialog((path) => readPackageJson(sender || webContents, path));
 }
 
+export const openProjectByPath = (event, path) => {
+  readPackageJson(event.sender, path);
+}

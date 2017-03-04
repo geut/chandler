@@ -13,6 +13,8 @@ export const closeProject = (event) => (dispatch) => dispatch({type: PROJECT_CLO
 
 export const openProject = (event) => (dispatch) => dispatch(send('project:open'));
 
+export const openProjectByPath = (path) => (dispatch) => dispatch(send('project:openByPath', path));
+
 export const getChangelog = (path) => (dispatch) => dispatch(send('changelog:load', path));
 
 export const initChangelog = (path) => (dispatch) => dispatch(send('changelog:init', path));

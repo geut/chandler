@@ -3,11 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Dashboard from '../components/dashboard';
-import { openProject } from '../actions';
+import { openProject, openProjectByPath } from '../actions';
 
 
-const Welcome = ({ openProject }) => (
-  <Dashboard onOpenProject={openProject}/>
+const Welcome = ({ openProject, openProjectByPath, recent }) => (
+  <Dashboard onOpenProject={openProject} onOpenRecent={openProjectByPath} recent={recent}/>
 );
 
-export default connect(null, { openProject })(Welcome);
+const mapStateToProps = ({ recent }) => ({ recent })
+
+export default connect(mapStateToProps, { openProject, openProjectByPath })(Welcome);

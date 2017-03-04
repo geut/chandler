@@ -56,12 +56,12 @@ const styles = StyleSheet.create({
   header: {
     flex: '2 0 0',
     textAlign: 'right',
-    background: 'gray',
+    background: 'orange',
     padding: 15
   },
   title: {
     fontSize: '72px',
-    color: '#e3e3e3'
+    color: '#f3f3f3'
   },
   headline: {
     fontSize: '32px',

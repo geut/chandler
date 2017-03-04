@@ -7,7 +7,7 @@ import OpenRecent from './open-recent';
 const Dashboard = ({ onOpenProject, onOpenRecent, recent }) => {
   const {
     container,
-    main, recentProjects,
+    main, footer,
     header, title, headline, actions, button
   } = styles;
 
@@ -24,10 +24,12 @@ const Dashboard = ({ onOpenProject, onOpenRecent, recent }) => {
           <button className={css(button)} type="button" onClick={onOpenProject}>Open Project</button>
         </div>
       </div>
+      <div className={css(footer)}>
       {
         showRecent &&
-        <OpenRecent className={css(recentProjects)} recent={recent} onOpenRecent={onOpenRecent} />
+        <OpenRecent recent={recent} onOpenRecent={onOpenRecent} />
       }
+      </div>
     </div>
   );
 };
@@ -47,8 +49,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     flex: 3,
+    paddingTop: 100
   },
-  recentProjects: {
+  footer: {
     alignItems: 'center',
     flex: 1,
     background: '#f0f0f0'

@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+import ReactRemark from 'react-remark';
 
 const kinds = [
   { text: 'Added', value: 'added' },
@@ -15,7 +16,8 @@ export default class ChangeInput extends Component {
 
   initialState = {
     text: '',
-    selectedKind: 'added'
+    selectedKind: 'added',
+    preview: false
   }
 
   state = {
@@ -48,10 +50,16 @@ export default class ChangeInput extends Component {
     this.setState({selectedKind: e.target.value});
   }
 
+  handlePreview = (e) => {
+    const { preview } = this.state;
+
+    this.setState({ preview: !preview })
+  }
+
   render() {
     const { editing, kind } = this.props;
-    const { text, selectedKind } = this.state;
-    const { modal, container, actions, input, options } = styles;
+    const { text, selectedKind, preview } = this.state;
+    const { modal, container, action, input, options } = styles;
     const isOpen = (editing === kind);
 
     return (
@@ -75,17 +83,25 @@ export default class ChangeInput extends Component {
           </div>
           }
           <div>
-            <textarea
-              type="text"
-              className={css(input)}
-              onChange={this.handleChange}
-              rows="10"
-              value={text}
-            />
+            {
+              preview &&
+              <ReactRemark source={text} />
+            }
+            {
+              !preview &&
+              <textarea
+                type="text"
+                className={css(input)}
+                onChange={this.handleChange}
+                rows="10"
+                value={text}
+              />
+            }
           </div>
-          <div className={css(actions)}>
-            <button type="button" onClick={this.handleSave}>Add</button>
-            <button type="button" onClick={this.handleCancel}>Cancel</button>
+          <div>
+            <button type="button" className={css(action)} onClick={this.handlePreview}>{ preview ? 'Edit' : 'Preview'}</button>
+            <button type="button" className={css(action)} onClick={this.handleSave}>Add</button>
+            <button type="button" className={css(action)} onClick={this.handleCancel}>Cancel</button>
           </div>
         </div>
       }
@@ -102,8 +118,9 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0
   },
-  actions: {
-
+  action: {
+    margin: 5,
+    padding: 5
   },
   container: {
     position: 'relative',

@@ -59,7 +59,7 @@ export default class ChangeInput extends Component {
   render() {
     const { editing, kind } = this.props;
     const { text, selectedKind, preview } = this.state;
-    const { modal, container, action, input, options } = styles;
+    const { modal, container, positionedAny, action, input, field, options } = styles;
     const isOpen = (editing === kind);
 
     return (
@@ -70,7 +70,7 @@ export default class ChangeInput extends Component {
       }
       {
         isOpen &&
-        <div className={css(container)} >
+        <div className={css(container, kind === 'any' && positionedAny)} >
           {
             kind === 'any' &&
           <div>
@@ -82,18 +82,18 @@ export default class ChangeInput extends Component {
             </select>
           </div>
           }
-          <div>
+          <div className={css(input)}>
             {
               preview &&
-              <ReactRemark source={text} />
+              <ReactRemark source={`- ${text}`} />
             }
             {
               !preview &&
               <textarea
+                autoFocus
                 type="text"
-                className={css(input)}
+                className={css(field)}
                 onChange={this.handleChange}
-                rows="10"
                 value={text}
               />
             }
@@ -122,11 +122,13 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 5
   },
+  positionedAny: {
+    margin: '-20px -20px 5px -20px',
+  },
   container: {
     position: 'relative',
     background: '#f9f9f9',
     padding: '20px 20px',
-    margin: '-10px -20px 5px -20px',
     boxShadow: 'inset 0 0 2px silver',
     borderTop: '1px solid silver',
     ':after': {
@@ -145,14 +147,18 @@ const styles = StyleSheet.create({
       borderLeft: '10px solid transparent',
       borderTop: '10px solid silver'
     }
-
   },
   input: {
+    height: 150,
+    overflow: 'auto'
+  },
+  field: {
     ':focus':{
       background: '#fefefe',
     },
     background: '#f0f0f0',
-    width: '100%'
+    width: '100%',
+    height: '95%',
   },
   options: {
     width: '100%'

@@ -99,8 +99,8 @@ export default class ChangeInput extends Component {
             }
           </div>
           <div>
-            <button type="button" className={css(action)} onClick={this.handlePreview}>{ preview ? 'Edit' : 'Preview'}</button>
-            <button type="button" className={css(action)} onClick={this.handleSave}>Add</button>
+            <button type="button" className={css(action)} onClick={this.handlePreview} disabled={!text}>{ preview ? 'Edit' : 'Preview'}</button>
+            <button type="button" className={css(action)} onClick={this.handleSave} disabled={!text}>Add</button>
             <button type="button" className={css(action)} onClick={this.handleCancel}>Cancel</button>
           </div>
         </div>
@@ -127,6 +127,9 @@ const styles = StyleSheet.create({
   },
   container: {
     position: 'relative',
+
+    margin: '-10px -20px 10px -52px',
+
     background: '#f9f9f9',
     padding: '20px 20px',
     boxShadow: 'inset 0 0 2px silver',

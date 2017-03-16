@@ -48,7 +48,7 @@ const hastNodeChangeList = (node, props) => {
 const toHastNodes = (mdast, { onEdit, editing, onSaveChange, onCancelChange }) => {
   const root = toHAST(mdast);
   const children = [];
-  const { markdownMD, mask, hidden } = styles;
+  const { markdown, mask, hidden } = styles;
   let unrelease = false;
   let unrelase_found  = false;
   let kind;
@@ -98,13 +98,13 @@ const toHastNodes = (mdast, { onEdit, editing, onSaveChange, onCancelChange }) =
   return  {
     type: 'element',
     tagName: 'div',
-    properties: {className: [css(markdownMD), 'markdown-body'] },
+    properties: {className: [css(markdown), 'markdown-body'] },
     children
   };
 }
 
 
-export default class ChangelogMD extends Component {
+export default class Changelog extends Component {
 
   state = {
     editing: null
@@ -128,14 +128,36 @@ export default class ChangelogMD extends Component {
     const { onEdit, onSaveChange, onCancelChange } = this;
     const { mdast } = this.props;
     const { editing } = this.state;
+    const { container, content } = styles;
 
-    return hastToReact(h, toHastNodes(mdast, { onEdit, onSaveChange, onCancelChange, editing }));
+    return (
+      <div className={css(container)}>
+        <div className={css(content)}>
+        {
+          hastToReact(h, toHastNodes(mdast, { onEdit, onSaveChange, onCancelChange, editing }))
+        }
+        </div>
+      </div>
+    )
   }
 }
 
 
 const styles = StyleSheet.create({
-  markdownMD: {
+  container: {
+    display: 'flex',
+    alignItems: 'stretch',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flex: '1',
+    background: '#f9f9f9'
+  },
+  content: {
+    flex: '1 0 0',
+    overflowY: 'scroll',
+    padding: '10px 20px 20px'
+  },
+  markdown: {
     position: 'relative',
     padding: '20px 20px',
     background: 'white',

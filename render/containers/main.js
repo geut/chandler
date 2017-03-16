@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../components/header';
-import Changelog from './changelog';
+import Editor from './editor';
 import { closeProject } from '../actions';
 
 
 const Main = ({ project, closeProject }) => (
+  project.loaded &&
   <div className={css(main)}>
     <Header project={project} onCloseProject={closeProject} />
-    <Changelog path={project.path}/>
+    <Editor path={project.path}/>
   </div>
 );
 

@@ -8,19 +8,15 @@ import Message from '../components/message';
 
 const App = ({ loaded, error }) => (
   <div>
-    {
-      error &&
-      <Message message={error} type="error"/>
-    }
-    {
-      loaded ? <Main />  : <Welcome />
-    }
+    <Message message={error} type="error"/>
+    <Main />
+    <Welcome />
   </div>
 );
 
-const mapStateToProps = ({ project, error }) => (
+const mapStateToProps = ({ error }) => (
   {
-    loaded: project.loaded,
+
     error
   }
 );

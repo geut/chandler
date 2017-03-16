@@ -1,45 +1,38 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, css } from 'aphrodite';
 
-import ChangelogMD from '../components/changelog-md';
-import { addChange } from '../actions';
+import { getChangelog, initChangelog, addChange } from '../actions'
 
-const Editor = ({ mdast, path, addChange }) => {
-  const { container, content } = styles;
+import Changelog from '../components/changelog';
+import ChangelogNotFound from '../components/changelog-not-found';
 
-  return (
-    <div className={css(container)}>
+class Editor extends Component {
 
-      <div className={css(content)}>
-        <ChangelogMD mdast={mdast} onAddChange={addChange} path={path}/>
-      </div>
+    componentDidMount() {
+      const { path, getChangelog } = this.props;
 
-  </div>
-  );
-}
+      getChangelog(path);
+    }
+
+    render() {
+      const { loaded, loading, path, mdast, initChangelog, addChange } = this.props;
+
+      return (
+        loaded ?
+          <Changelog mdast={mdast} onAddChange={addChange} path={path}/>
+        :
+          !loading && <ChangelogNotFound onInitChangelog={initChangelog} path={path}/>
+      );
+    }
+};
+
 
 const mapStateToProps = ({ project, changelog }) => ({
+  loaded: changelog.loaded,
+  loading: changelog.loading,
   path: project.path,
   mdast: changelog.mdast
 });
 
-export default connect(mapStateToProps, { addChange })(Editor);
-
-
-const styles = StyleSheet.create({
-    container: {
-      display: 'flex',
-      alignItems: 'stretch',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      flex: '1',
-      background: '#f9f9f9'
-    },
-    content: {
-      flex: '1 0 0',
-      overflowY: 'scroll',
-      padding: '10px 20px 20px'
-    }
-});
+export default connect(mapStateToProps, { getChangelog, initChangelog, addChange })(Editor);

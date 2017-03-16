@@ -6,10 +6,11 @@ import Dashboard from '../components/dashboard';
 import { openProject, openProjectByPath } from '../actions';
 
 
-const Welcome = ({ openProject, openProjectByPath, recent }) => (
+const Welcome = ({ openProject, openProjectByPath, recent, project }) => (
+  !project.loaded &&
   <Dashboard onOpenProject={openProject} onOpenRecent={openProjectByPath} recent={recent}/>
 );
 
-const mapStateToProps = ({ recent }) => ({ recent })
+const mapStateToProps = ({ recent, project }) => ({ recent, project })
 
 export default connect(mapStateToProps, { openProject, openProjectByPath })(Welcome);

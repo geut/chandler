@@ -7,12 +7,12 @@ const Message = ({ message, type = 'error'}) => {
   const { container, animation } = styles;
   const kind = styles[`${type}Msg`];
 
-
   return (
-      <div className={css(kind, container, animation)}>
-        {message}
-      </div>
-  )
+    message &&
+    <div className={css(kind, container, animation)}>
+      {message}
+    </div>
+  );
 }
 
 export default Message;

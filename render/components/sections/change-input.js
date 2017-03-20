@@ -63,13 +63,9 @@ export default class ChangeInput extends Component {
     const isOpen = (editing === kind);
 
     return (
+      isOpen &&
       <div>
-      {
-        isOpen &&
         <div className={css(modal)} onClick={this.handleCancel}></div>
-      }
-      {
-        isOpen &&
         <div className={css(container, kind === 'any' && positionedAny)} >
           {
             kind === 'any' &&
@@ -104,7 +100,6 @@ export default class ChangeInput extends Component {
             <button type="button" className={css(action)} onClick={this.handleCancel}>Cancel</button>
           </div>
         </div>
-      }
       </div>
     )
   }

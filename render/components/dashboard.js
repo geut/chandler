@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     flex: 3,
-    paddingTop: 100
+    paddingTop: '5vh'
   },
   footer: {
     alignItems: 'center',

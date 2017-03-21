@@ -4,12 +4,13 @@ import { StyleSheet, css } from 'aphrodite';
 
 const Message = ({ message, type = 'error'}) => {
 
-  const { container, animation } = styles;
+  const { container, title, animation } = styles;
   const kind = styles[`${type}Msg`];
 
   return (
     message &&
     <div className={css(kind, container, animation)}>
+      <div className={css(title)}>{type}</div>
       {message}
     </div>
   );
@@ -34,12 +35,18 @@ const styles = StyleSheet.create({
     right: 10,
     padding: 25,
     color: '#404040',
-    fontWeight: 300,
+    fontWeight: 400,
     borderStyle: `solid`,
-    borderWidth: '1px 1px 1px 10px'
+    borderWidth: '1px 1px 1px 10px',
+    backgroundColor: '#f9f9f9',
+    boxShadow: '0 0 5px rgba(32,32,32,0.6)'
+  },
+  title: {
+    fontWeight: 600,
+    textTransform: 'capitalize'
   },
   errorMsg: {
-    borderColor: 'red'
+    borderColor: '#ff7200'
   },
   animation: {
     animationName: [fadeIn,fadeOut],

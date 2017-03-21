@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 import OpenRecent from './open-recent';
+import Dragbar from './dragbar';
 
 const Dashboard = ({ onOpenProject, onOpenRecent, recent }) => {
   const {
@@ -15,6 +16,7 @@ const Dashboard = ({ onOpenProject, onOpenRecent, recent }) => {
 
   return (
     <div className={css(container)}>
+      <Dragbar />
       <div className={css(main)}>
         <div className={css(header)}>
           <div className={css(title)}>Chandler</div>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, css } from 'aphrodite';
 
 import Header from '../components/header';
+import Dragbar from '../components/dragbar';
 import Editor from './editor';
 import { closeProject } from '../actions';
 
@@ -11,6 +12,7 @@ import { closeProject } from '../actions';
 const Main = ({ project, closeProject }) => (
   project.loaded &&
   <div className={css(main)}>
+    <Dragbar title={project.name}/>
     <Header project={project} onCloseProject={closeProject} />
     <Editor path={project.path}/>
   </div>

@@ -19,7 +19,7 @@ app.on('window-all-closed', () => {
 app.on('ready', () => {
   ipc.listen();
 
-  mainWindow = new BrowserWindow({width: 800, height: 600}); //titleBarStyle: 'hidden-inset'
+  mainWindow = new BrowserWindow({width: 800, height: 600, titleBarStyle: 'hidden-inset'}); //titleBarStyle: 'hidden-inset'
 
   mainWindow.loadURL(`file://${index}`);
 

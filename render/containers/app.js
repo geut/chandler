@@ -14,11 +14,6 @@ const App = ({ loaded, error }) => (
   </div>
 );
 
-const mapStateToProps = ({ error }) => (
-  {
-
-    error
-  }
-);
+const mapStateToProps = ({ error }) => ({ error });
 
 export default connect(mapStateToProps)(App);

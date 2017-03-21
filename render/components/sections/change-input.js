@@ -159,6 +159,8 @@ const styles = StyleSheet.create({
     height: '95%',
   },
   options: {
-    width: '100%'
+    width: '100%',
+    fontSize: '16px',
+    marginBottom: '10px'
   }
 });

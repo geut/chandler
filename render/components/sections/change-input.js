@@ -56,6 +56,14 @@ export default class ChangeInput extends Component {
     this.setState({ preview: !preview })
   }
 
+  wrapPreview = (text) => {
+    const lines = text
+      .split('\n')
+      .map((line, idx)=> ((idx === 0) ? `- ${line}` : `  ${line}`) );
+
+    return lines.join('\n');
+  }
+
   render() {
     const { editing, kind } = this.props;
     const { text, selectedKind, preview } = this.state;
@@ -81,7 +89,7 @@ export default class ChangeInput extends Component {
           <div className={css(input)}>
             {
               preview &&
-              <ReactRemark source={`- ${text}`} />
+              <ReactRemark source={this.wrapPreview(text)} className="markdown-body preview"/>
             }
             {
               !preview &&
@@ -157,6 +165,8 @@ const styles = StyleSheet.create({
     background: '#f0f0f0',
     width: '100%',
     height: '95%',
+    border: '1px solid #e3e3e3',
+    fontSize: '14px'
   },
   options: {
     width: '100%',

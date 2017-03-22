@@ -51,9 +51,11 @@ export default class ChangeInput extends Component {
   }
 
   handlePreview = (e) => {
-    const { preview } = this.state;
+    this.setState({ preview: true });
+  }
 
-    this.setState({ preview: !preview })
+  handleEdit = (e) => {
+    this.setState({ preview: false });
   }
 
   wrapPreview = (text) => {
@@ -67,7 +69,7 @@ export default class ChangeInput extends Component {
   render() {
     const { editing, kind } = this.props;
     const { text, selectedKind, preview } = this.state;
-    const { modal, container, positionedAny, action, input, field, options } = styles;
+    const { modal, container, positionedAny, action, input, field, options, tabbar, tab, tabactive } = styles;
     const isOpen = (editing === kind);
 
     return (
@@ -86,13 +88,15 @@ export default class ChangeInput extends Component {
             </select>
           </div>
           }
+          <div className={css(tabbar)}>
+            <button type="button" className={css(tab, !preview && tabactive)} onClick={this.handleEdit} >Edit</button>
+            <button type="button" className={css(tab, preview && tabactive)} onClick={this.handlePreview} disabled={!text}>Preview</button>
+          </div>
           <div className={css(input)}>
             {
-              preview &&
+              preview ?
               <ReactRemark source={this.wrapPreview(text)} className="markdown-body preview"/>
-            }
-            {
-              !preview &&
+              :
               <textarea
                 autoFocus
                 type="text"
@@ -103,7 +107,6 @@ export default class ChangeInput extends Component {
             }
           </div>
           <div>
-            <button type="button" className={css(action)} onClick={this.handlePreview} disabled={!text}>{ preview ? 'Edit' : 'Preview'}</button>
             <button type="button" className={css(action)} onClick={this.handleSave} disabled={!text}>Add</button>
             <button type="button" className={css(action)} onClick={this.handleCancel}>Cancel</button>
           </div>
@@ -122,8 +125,9 @@ const styles = StyleSheet.create({
     bottom: 0
   },
   action: {
-    margin: 5,
-    padding: 5
+    margin: '5px 2px',
+    padding: 8,
+    minWidth: 100
   },
   positionedAny: {
     margin: '-20px -20px 5px -20px',
@@ -172,5 +176,22 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: '16px',
     marginBottom: '10px'
+  },
+  tabbar: {
+    margin: '10px -20px',
+    padding: '0 20px',
+    borderBottom: '1px solid silver'
+  },
+  tab: {
+    minWidth: 100,
+    background: '#f9f9f9',
+    padding: 9,
+    borderBottom: 'none',
+    borderTop: '1px solid silver'
+  },
+  tabactive: {
+    marginBottom: -1,
+    padding: 10,
+    borderTop: '2px solid #ff7200'
   }
 });

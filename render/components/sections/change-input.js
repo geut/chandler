@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import ReactRemark from 'react-remark';
 
+import Button from '../widgets/button';
+
 const kinds = [
   { text: 'Added', value: 'added' },
   { text: 'Changed', value: 'changed' },
@@ -69,7 +71,7 @@ export default class ChangeInput extends Component {
   render() {
     const { editing, kind } = this.props;
     const { text, selectedKind, preview } = this.state;
-    const { modal, container, positionedAny, action, input, field, options, tabbar, tab, tabactive } = styles;
+    const { modal, container, positionedAny, input, field, options, tabbar, tab, tabactive } = styles;
     const isOpen = (editing === kind);
 
     return (
@@ -107,8 +109,8 @@ export default class ChangeInput extends Component {
             }
           </div>
           <div>
-            <button type="button" className={css(action)} onClick={this.handleSave} disabled={!text}>Add</button>
-            <button type="button" className={css(action)} onClick={this.handleCancel}>Cancel</button>
+            <Button ui="action" onClick={this.handleSave} disabled={!text}>Add</Button>
+            <Button onClick={this.handleCancel}>Cancel</Button>
           </div>
         </div>
       </div>
@@ -123,11 +125,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0
-  },
-  action: {
-    margin: '5px 2px',
-    padding: 8,
-    minWidth: 100
   },
   positionedAny: {
     margin: '-20px -20px 5px -20px',

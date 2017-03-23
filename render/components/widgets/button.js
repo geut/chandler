@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
-const Button = ({ ui, className, children, ...props }) => {
+const Button = ({ ui, className="", children, ...props }) => {
   const { button } = styles;
-  const uiType = ui ? styles[ui] : undefined;
+  const uiType = styles[ui];
 
   return (
-    <button type="button" className={`${css(button, uiType)} ${className}`} {...props} >
+    <button type="button" className={`${css(button, ui && uiType)} ${className}`} {...props} >
       {children}
     </button>
   );

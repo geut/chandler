@@ -49,6 +49,7 @@ const toHastNodes = (mdast, { onEdit, editing, onSaveChange, onCancelChange }) =
   const root = toHAST(mdast);
   const children = [];
   const { markdown, mask, hidden } = styles;
+  const markdownBodyCls = 'markdown-body';
   let unrelease = false;
   let unrelase_found  = false;
   let kind;
@@ -98,7 +99,7 @@ const toHastNodes = (mdast, { onEdit, editing, onSaveChange, onCancelChange }) =
   return  {
     type: 'element',
     tagName: 'div',
-    properties: {className: [css(markdown), 'markdown-body'] },
+    properties: { className: `${css(markdown)} ${markdownBodyCls}` },
     children
   };
 }

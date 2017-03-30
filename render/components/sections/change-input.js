@@ -63,14 +63,14 @@ export default class ChangeInput extends Component {
   render() {
     const { editing, kind } = this.props;
     const { text, selectedKind } = this.state;
-    const { modal, container, positionedAny, input, field, options, tabbar, tab, tabactive } = styles;
+    const { modal, container, positionAny, input, field, options } = styles;
     const isOpen = (editing === kind);
 
     return (
       isOpen &&
       <div>
         <div className={css(modal)} onClick={this.handleCancel}></div>
-        <div className={css(container, kind === 'any' && positionedAny)} >
+        <div className={css(container, kind === 'any' && positionAny)} >
           {
             kind === 'any' &&
           <div>
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0
   },
-  positionedAny: {
-    margin: '-20px -20px 5px -20px',
+  positionAny: {
+    margin: '-20px -20px 5px -20px'
   },
   container: {
     position: 'relative',

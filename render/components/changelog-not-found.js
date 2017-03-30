@@ -2,13 +2,15 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
+import Button from './widgets/button';
+
 const ChangelogNotFound = ({ onInitChangelog, path }) => {
   const { content, title, actions } = styles;;
   return (
       <div className={css(content)}>
         <div className={css(title)}>No Changelog found for this project</div>
         <div className={css(actions)}>
-          <button type="button" onClick={(e) => onInitChangelog(path) }>Initialize</button>
+          <Button ui="action" onClick={(e) => onInitChangelog(path) }>Initialize</Button>
         </div>
       </div>
     );
@@ -19,7 +21,6 @@ export default ChangelogNotFound;
 const styles = StyleSheet.create({
   content: {
     height: '100vh',
-
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',

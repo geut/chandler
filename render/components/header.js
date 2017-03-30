@@ -2,6 +2,8 @@
 import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
+import Button from './widgets/button';
+
 const Header = (props) => {
   const { project, onCloseProject } = props;
   const { toolbar, lighter, title, actions, action } = styles;
@@ -14,7 +16,7 @@ const Header = (props) => {
         <i className="fa fa-folder-open-o"/> {name} <span className={css(lighter)}> v{version}</span>
       </div>
       <div className={css(actions)}>
-        <button type="button" className={css(action)} onClick={onCloseProject}>Close</button>
+        <Button onClick={onCloseProject}>Close</Button>
       </div>
     </div>
   );
@@ -54,11 +56,5 @@ const styles = StyleSheet.create({
     flex: '1 0 0',
     textAlign: 'right',
     padding: '0 20px'
-  },
-  action: {
-    fontSize: 12,
-    lineHeight: '18px',
-    minWidth: 55
   }
-
 });

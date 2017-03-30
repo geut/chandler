@@ -10,7 +10,7 @@ const ChangelogNotFound = ({ onInitChangelog, path }) => {
       <div className={css(content)}>
         <div className={css(title)}>No Changelog found for this project</div>
         <div className={css(actions)}>
-          <Button ui="action" onClick={(e) => onInitChangelog(path) }>Initialize</Button>
+          <Button ui="action" onClick={(e) => onInitChangelog(path) }>Create Changelog</Button>
         </div>
       </div>
     );

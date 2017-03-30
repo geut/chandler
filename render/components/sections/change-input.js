@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import ReactRemark from 'react-remark';
 
 import Button from '../widgets/button';
+import Tab, { TabItem } from '../widgets/tab';
 
 const kinds = [
   { text: 'Added', value: 'added' },
@@ -18,8 +19,7 @@ export default class ChangeInput extends Component {
 
   initialState = {
     text: '',
-    selectedKind: 'added',
-    preview: false
+    selectedKind: 'added'
   }
 
   state = {
@@ -52,25 +52,17 @@ export default class ChangeInput extends Component {
     this.setState({selectedKind: e.target.value});
   }
 
-  handlePreview = (e) => {
-    this.setState({ preview: true });
-  }
-
-  handleEdit = (e) => {
-    this.setState({ preview: false });
-  }
 
   wrapPreview = (text) => {
-    const lines = text
+    return text
       .split('\n')
-      .map((line, idx)=> ((idx === 0) ? `- ${line}` : `  ${line}`) );
-
-    return lines.join('\n');
+      .map((line, idx)=> ((idx === 0) ? `- ${line}` : `  ${line}`) )
+      .join('\n');
   }
 
   render() {
     const { editing, kind } = this.props;
-    const { text, selectedKind, preview } = this.state;
+    const { text, selectedKind } = this.state;
     const { modal, container, positionedAny, input, field, options, tabbar, tab, tabactive } = styles;
     const isOpen = (editing === kind);
 
@@ -90,15 +82,8 @@ export default class ChangeInput extends Component {
             </select>
           </div>
           }
-          <div className={css(tabbar)}>
-            <button type="button" className={css(tab, !preview && tabactive)} onClick={this.handleEdit} >Edit</button>
-            <button type="button" className={css(tab, preview && tabactive)} onClick={this.handlePreview} disabled={!text}>Preview</button>
-          </div>
-          <div className={css(input)}>
-            {
-              preview ?
-              <ReactRemark source={this.wrapPreview(text)} className="markdown-body preview"/>
-              :
+          <Tab>
+            <TabItem title="Edit" className={css(input)}>
               <textarea
                 autoFocus
                 type="text"
@@ -106,8 +91,11 @@ export default class ChangeInput extends Component {
                 onChange={this.handleChange}
                 value={text}
               />
-            }
-          </div>
+            </TabItem>
+            <TabItem title="Preview" className={css(input)} disabled={!text}>
+              <ReactRemark source={this.wrapPreview(text)} className="markdown-body preview"/>
+            </TabItem>
+          </Tab>
           <div>
             <Button ui="action" onClick={this.handleSave} disabled={!text}>Add</Button>
             <Button onClick={this.handleCancel}>Cancel</Button>
@@ -173,22 +161,5 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: '16px',
     marginBottom: '10px'
-  },
-  tabbar: {
-    margin: '10px -20px',
-    padding: '0 20px',
-    borderBottom: '1px solid silver'
-  },
-  tab: {
-    minWidth: 100,
-    background: '#f9f9f9',
-    padding: 9,
-    borderBottom: 'none',
-    borderTop: '1px solid silver'
-  },
-  tabactive: {
-    marginBottom: -1,
-    padding: 10,
-    borderTop: '2px solid #ff7200'
   }
 });

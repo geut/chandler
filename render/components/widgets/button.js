@@ -1,13 +1,13 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 const Button = ({ ui, className="", children, ...props }) => {
   const { button } = styles;
-  const uiType = styles[ui];
+  const uiStyle = styles[ui];
 
   return (
-    <button type="button" className={`${css(button, ui && uiType)} ${className}`} {...props} >
+    <button type="button" className={`${css(button, ui && uiStyle)} ${className}`} {...props} >
       {children}
     </button>
   );
